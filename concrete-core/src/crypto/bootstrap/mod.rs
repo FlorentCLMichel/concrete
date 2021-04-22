@@ -1,6 +1,5 @@
 //! Bootstrapping key
 use fftw::array::AlignedVec;
-use serde::{Deserialize, Serialize};
 
 use crate::crypto::encoding::Plaintext;
 use crate::crypto::{LweDimension, UnsignedTorus};
@@ -17,7 +16,7 @@ use super::secret::{GlweSecretKey, LweSecretKey};
 use super::GlweSize;
 
 /// A bootstrapping key
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct BootstrapKey<Cont> {
     tensor: Tensor<Cont>,
     poly_size: PolynomialSize,
