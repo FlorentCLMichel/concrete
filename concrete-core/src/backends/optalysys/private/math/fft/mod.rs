@@ -12,8 +12,6 @@ mod tests;
 mod twiddles;
 use twiddles::*;
 
-mod plan;
-
 mod polynomial;
 pub use polynomial::*;
 
