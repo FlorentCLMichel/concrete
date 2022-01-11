@@ -22,7 +22,7 @@ use crate::backends::optalysys::private::math::tensor::{
 use crate::backends::optalysys::private::math::torus::UnsignedTorus;
 use crate::backends::optalysys::private::utils::{zip, zip_args};
 use crate::backends::optalysys::private::crypto::bootstrap::fourier::buffers::FftBuffers;
-use crate::backends::optalysys::private::crypto::bootstrap::fourier::buffers::FourierBskBuffers;
+pub use crate::backends::optalysys::private::crypto::bootstrap::fourier::buffers::FourierBskBuffers;
 
 pub(crate) mod buffers;
 #[cfg(test)]

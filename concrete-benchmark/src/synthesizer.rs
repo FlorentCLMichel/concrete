@@ -118,15 +118,21 @@ pub trait SynthesizablePlaintextVectorEntity: PlaintextVectorEntity {
 
 /// A type containing all the necessary engines needed to generate any entity.
 pub struct Synthesizer {
-    #[cfg(feature = "backend_core")]
+    #[cfg(all(feature = "backend_core", not(feature = "backend_optalysys")))]
     core_engine: concrete_core::backends::core::engines::CoreEngine,
+    
+    #[cfg(feature = "backend_optalysys")]
+    core_engine: concrete_core::backends::optalysys::engines::CoreEngine,
 }
 
 impl Default for Synthesizer {
     fn default() -> Self {
         Synthesizer {
-            #[cfg(feature = "backend_core")]
+            #[cfg(all(feature = "backend_core", not(feature = "backend_optalysys")))]
             core_engine: concrete_core::backends::core::engines::CoreEngine::new().unwrap(),
+            
+            #[cfg(feature = "backend_optalysys")]
+            core_engine: concrete_core::backends::optalysys::engines::CoreEngine::new().unwrap(),
         }
     }
 }
