@@ -1,3 +1,10 @@
+/* WARNING: Using the functions ft_inplace_stable_from_other_type and 
+ * ift_inplace_stable_from_other_type is unsafe.
+ *
+ * TO DO: replace them by ft_inplace_stable and ift_inplace_stable
+ */
+
+
 use std::slice;
 
 use concrete_fftw::array::AlignedVec;
@@ -450,7 +457,7 @@ impl Fft {
         );
 
         // We perform the forward fft
-        self.plans.ft_inplace_stable(
+        self.plans.ft_inplace_stable_from_other_type(
             self.buffer.borrow().as_tensor().as_slice(),
             fourier_poly.as_mut_tensor().as_mut_slice(),
         );
@@ -489,7 +496,7 @@ impl Fft {
         );
 
         // We perform the forward on the first fourier polynomial.
-        self.plans.ft_inplace_stable(
+        self.plans.ft_inplace_stable_from_other_type(
             self.buffer.borrow().as_tensor().as_slice(),
             fourier_poly_1.as_mut_tensor().as_mut_slice(),
         );
@@ -523,7 +530,7 @@ impl Fft {
         }
 
         // We perform the backward fft
-        self.plans.ift_inplace_stable(
+        self.plans.ift_inplace_stable_from_other_type(
             fourier_poly.as_tensor().as_slice(),
             self.buffer.borrow_mut().as_mut_tensor().as_mut_slice(),
         );
@@ -578,7 +585,7 @@ impl Fft {
         }
 
         // We perform the backward fft
-        self.plans.ift_inplace_stable(
+        self.plans.ift_inplace_stable_fro;_other_type(
             fourier_poly_1.as_tensor().as_slice(),
             self.buffer.borrow_mut().as_mut_tensor().as_mut_slice(),
         );
