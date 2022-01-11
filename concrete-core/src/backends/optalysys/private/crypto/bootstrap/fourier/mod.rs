@@ -9,18 +9,18 @@ use concrete_commons::parameters::{
     PolynomialSize,
 };
 
-use crate::backends::core::private::crypto::bootstrap::standard::StandardBootstrapKey;
-use crate::backends::core::private::crypto::ggsw::GgswCiphertext;
-use crate::backends::core::private::crypto::glwe::GlweCiphertext;
-use crate::backends::core::private::crypto::lwe::LweCiphertext;
-use crate::backends::core::private::math::decomposition::SignedDecomposer;
-use crate::backends::core::private::math::fft::{Complex64, FourierPolynomial};
-use crate::backends::core::private::math::polynomial::{Polynomial, PolynomialList};
-use crate::backends::core::private::math::tensor::{
+use crate::backends::optalysys::private::crypto::bootstrap::standard::StandardBootstrapKey;
+use crate::backends::optalysys::private::crypto::ggsw::GgswCiphertext;
+use crate::backends::optalysys::private::crypto::glwe::GlweCiphertext;
+use crate::backends::optalysys::private::crypto::lwe::LweCiphertext;
+use crate::backends::optalysys::private::math::decomposition::SignedDecomposer;
+use crate::backends::optalysys::private::math::fft::{Complex64, FourierPolynomial};
+use crate::backends::optalysys::private::math::polynomial::{Polynomial, PolynomialList};
+use crate::backends::optalysys::private::math::tensor::{
     ck_dim_div, ck_dim_eq, AsMutSlice, AsMutTensor, AsRefSlice, AsRefTensor, IntoTensor, Tensor,
 };
-use crate::backends::core::private::math::torus::UnsignedTorus;
-use crate::backends::core::private::utils::{zip, zip_args};
+use crate::backends::optalysys::private::math::torus::UnsignedTorus;
+use crate::backends::optalysys::private::utils::{zip, zip_args};
 use crate::backends::optalysys::private::crypto::bootstrap::fourier::buffers::FftBuffers;
 use crate::backends::optalysys::private::crypto::bootstrap::fourier::buffers::FourierBskBuffers;
 
@@ -58,8 +58,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -109,8 +109,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let vector = vec![Complex64::new(0., 0.); 256 * 5 * 4 * 4 * 15];
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::from_container(
     ///     vector.as_slice(),
@@ -160,10 +160,10 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::{
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::{
     ///     FourierBootstrapKey, FourierBskBuffers, StandardBootstrapKey,
     /// };
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk = StandardBootstrapKey::allocate(
     ///     9u32,
     ///     GlweSize(7),
@@ -218,8 +218,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -242,8 +242,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -266,8 +266,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -290,8 +290,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -314,8 +314,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -338,8 +338,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -373,8 +373,8 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
     /// let bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -419,9 +419,9 @@ where
     /// use concrete_commons::parameters::{
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweSize, LweDimension, PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::FourierBootstrapKey;
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
-    /// use concrete_core::backends::core::private::math::tensor::{AsMutTensor, AsRefTensor};
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::FourierBootstrapKey;
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::math::tensor::{AsMutTensor, AsRefTensor};
     /// let mut bsk: FourierBootstrapKey<_, u32> = FourierBootstrapKey::allocate(
     ///     Complex64::new(9., 8.),
     ///     GlweSize(7),
@@ -771,18 +771,18 @@ where
     ///     DecompositionBaseLog, DecompositionLevelCount, GlweDimension, LweDimension, LweSize,
     ///     PolynomialSize,
     /// };
-    /// use concrete_core::backends::core::private::crypto::bootstrap::{
+    /// use concrete_core::backends::optalysys::private::crypto::bootstrap::{
     ///     FourierBootstrapKey, FourierBskBuffers, StandardBootstrapKey,
     /// };
-    /// use concrete_core::backends::core::private::crypto::encoding::Plaintext;
-    /// use concrete_core::backends::core::private::crypto::glwe::GlweCiphertext;
-    /// use concrete_core::backends::core::private::crypto::lwe::LweCiphertext;
-    /// use concrete_core::backends::core::private::crypto::secret::generators::{
+    /// use concrete_core::backends::optalysys::private::crypto::encoding::Plaintext;
+    /// use concrete_core::backends::optalysys::private::crypto::glwe::GlweCiphertext;
+    /// use concrete_core::backends::optalysys::private::crypto::lwe::LweCiphertext;
+    /// use concrete_core::backends::optalysys::private::crypto::secret::generators::{
     ///     EncryptionRandomGenerator, SecretRandomGenerator,
     /// };
-    /// use concrete_core::backends::core::private::crypto::secret::{GlweSecretKey, LweSecretKey};
-    /// use concrete_core::backends::core::private::math::fft::Complex64;
-    /// use concrete_core::backends::core::private::math::tensor::AsMutTensor;
+    /// use concrete_core::backends::optalysys::private::crypto::secret::{GlweSecretKey, LweSecretKey};
+    /// use concrete_core::backends::optalysys::private::math::fft::Complex64;
+    /// use concrete_core::backends::optalysys::private::math::tensor::AsMutTensor;
     ///
     /// // define settings
     /// let polynomial_size = PolynomialSize(1024);

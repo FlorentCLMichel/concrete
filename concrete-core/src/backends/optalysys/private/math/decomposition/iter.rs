@@ -1,8 +1,8 @@
-use crate::backends::core::private::math::decomposition::{
+use crate::backends::optalysys::private::math::decomposition::{
     DecompositionLevel, DecompositionTerm, DecompositionTermTensor,
 };
-use crate::backends::core::private::math::tensor::Tensor;
-use crate::backends::core::private::utils::{zip, zip_args};
+use crate::backends::optalysys::private::math::tensor::Tensor;
+use crate::backends::optalysys::private::utils::{zip, zip_args};
 use concrete_commons::numeric::{SignedInteger, UnsignedInteger};
 use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
 
@@ -86,8 +86,8 @@ where
     ///
     /// ```rust
     /// use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
-    /// use concrete_core::backends::core::private::math::decomposition::SignedDecomposer;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::decomposition::SignedDecomposer;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let decomposer =
     ///     SignedDecomposer::<u32>::new(DecompositionBaseLog(4), DecompositionLevelCount(3));
     /// let decomposable = Tensor::allocate(1_340_987_234_u32, 2);
@@ -106,8 +106,8 @@ where
     ///
     /// ```rust
     /// use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
-    /// use concrete_core::backends::core::private::math::decomposition::SignedDecomposer;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::decomposition::SignedDecomposer;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let decomposer =
     ///     SignedDecomposer::<u32>::new(DecompositionBaseLog(4), DecompositionLevelCount(3));
     /// let decomposable = Tensor::allocate(1_340_987_234_u32, 2);
@@ -129,10 +129,10 @@ where
     ///
     /// ```rust
     /// use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
-    /// use concrete_core::backends::core::private::math::decomposition::{
+    /// use concrete_core::backends::optalysys::private::math::decomposition::{
     ///     DecompositionLevel, SignedDecomposer,
     /// };
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let decomposer =
     ///     SignedDecomposer::<u32>::new(DecompositionBaseLog(4), DecompositionLevelCount(3));
     /// let decomposable = Tensor::allocate(1_340_987_234_u32, 1);
@@ -239,7 +239,7 @@ where
     ///
     /// ```rust
     /// use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
-    /// use concrete_core::backends::core::private::math::decomposition::SignedDecomposer;
+    /// use concrete_core::backends::optalysys::private::math::decomposition::SignedDecomposer;
     /// let decomposer =
     ///     SignedDecomposer::<u32>::new(DecompositionBaseLog(4), DecompositionLevelCount(3));
     /// let val = 1_340_987_234_u32;
@@ -258,7 +258,7 @@ where
     ///
     /// ```rust
     /// use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
-    /// use concrete_core::backends::core::private::math::decomposition::SignedDecomposer;
+    /// use concrete_core::backends::optalysys::private::math::decomposition::SignedDecomposer;
     /// let decomposer =
     ///     SignedDecomposer::<u32>::new(DecompositionBaseLog(4), DecompositionLevelCount(3));
     /// let val = 1_340_987_234_u32;

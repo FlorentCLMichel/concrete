@@ -15,7 +15,7 @@ use crate::backends::optalysys::private::math::torus::UnsignedTorus;
 use crate::backends::optalysys::private::utils::zip;
 
 use super::{Complex64, Correctors, FourierPolynomial};
-use pseudo_graphec::prelude::Simulator1;
+use pseudo_graphec::prelude::{OFTSimulator1 as Simulator, FourierEngine};
 use std::cell::RefCell;
 
 // Number of bits of accuracy for the OFT simulator.
@@ -27,7 +27,7 @@ const ACCURACY: usize = 32;
 /// domain.
 #[derive(Debug, Clone)]
 pub struct Fft {
-    plans: Simulator1,
+    plans: Simulator,
     correctors: Correctors,
     buffer: RefCell<FourierPolynomial<AlignedVec<Complex64>>>,
 }
@@ -49,7 +49,9 @@ impl Fft {
             "The size chosen is not valid ({}). Should be 256, 512, 1024, 2048 or 4096",
             size.0
         );
-        let plans = Simulator1::new(ACCURACY, size);
+
+        // TO DO: implement proper error handling
+        let plans = Simulator::new(ACCURACY, size.0).unwrap();
         let buffer = RefCell::new(FourierPolynomial::allocate(
             Complex64::new(0., 0.),
             PolynomialSize(size.0),
@@ -73,7 +75,7 @@ impl Fft {
     /// assert_eq!(fft.polynomial_size(), PolynomialSize(256));
     /// ```
     pub fn polynomial_size(&self) -> PolynomialSize {
-        self.plans.get_ft_size()
+        PolynomialSize(self.plans.get_ft_size())
     }
 
     /// Performs the forward fourier transform of the `poly` polynomial, viewed as a polynomial of

@@ -1,7 +1,7 @@
 use std::fmt::Debug;
 use std::iter::Iterator;
 
-use crate::backends::core::private::math::tensor::{
+use crate::backends::optalysys::private::math::tensor::{
     ck_dim_eq, tensor_traits, AsMutSlice, AsMutTensor, AsRefTensor, Tensor,
 };
 
@@ -21,7 +21,7 @@ const KARATUSBA_STOP: usize = 32;
 ///
 /// ```
 /// use concrete_commons::parameters::PolynomialSize;
-/// use concrete_core::backends::core::private::math::polynomial::Polynomial;
+/// use concrete_core::backends::optalysys::private::math::polynomial::Polynomial;
 /// let poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
 /// assert_eq!(poly.polynomial_size(), PolynomialSize(100));
 /// ```
@@ -42,7 +42,7 @@ where
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::Polynomial;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::Polynomial;
     /// let poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
     /// assert_eq!(poly.polynomial_size(), PolynomialSize(100));
     /// ```
@@ -58,7 +58,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::Polynomial;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::Polynomial;
     /// let vec = vec![0 as u32; 100];
     /// let poly = Polynomial::from_container(vec.as_slice());
     /// assert_eq!(poly.polynomial_size(), PolynomialSize(100));
@@ -79,7 +79,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::Polynomial;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::Polynomial;
     /// let poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
     /// assert_eq!(poly.polynomial_size(), PolynomialSize(100));
     /// ```
@@ -96,7 +96,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
     /// for monomial in poly.monomial_iter() {
     ///     assert!(monomial.degree().0 <= 99)
@@ -119,7 +119,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
     /// for coef in poly.coefficient_iter() {
     ///     assert_eq!(*coef, 0);
@@ -140,7 +140,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let poly = Polynomial::from_container(vec![16_u32, 8, 19, 12, 3]);
     /// let mono = poly.get_monomial(MonomialDegree(0));
     /// assert_eq!(*mono.get_coefficient(), 16_u32);
@@ -168,7 +168,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::Polynomial;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::Polynomial;
     /// let mut poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
     /// for mut monomial in poly.monomial_iter_mut() {
     ///     monomial.set_coefficient(monomial.degree().0 as u32);
@@ -197,7 +197,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::Polynomial;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::Polynomial;
     /// let mut poly = Polynomial::allocate(0 as u32, PolynomialSize(100));
     /// for mut coef in poly.coefficient_iter_mut() {
     ///     *coef = 1;
@@ -221,7 +221,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let mut poly = Polynomial::from_container(vec![16_u32, 8, 19, 12, 3]);
     /// let mut mono = poly.get_mut_monomial(MonomialDegree(0));
     /// mono.set_coefficient(18);
@@ -250,7 +250,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let lhs = Polynomial::from_container(vec![4_u8, 5, 0]);
     /// let rhs = Polynomial::from_container(vec![7_u8, 9, 0]);
     /// let mut res = Polynomial::allocate(0 as u8, PolynomialSize(3));
@@ -307,7 +307,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let lhs = Polynomial::from_container(vec![1_u32; 128]);
     /// let rhs = Polynomial::from_container(vec![2_u32; 128]);
     /// let mut res_kara = Polynomial::allocate(0 as u32, PolynomialSize(128));
@@ -410,7 +410,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, Polynomial, PolynomialList,
     /// };
     /// let poly_list = PolynomialList::from_container(vec![100_u8, 20, 3, 4, 5, 6], PolynomialSize(3));
@@ -460,7 +460,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, Polynomial, PolynomialList,
     /// };
     /// let poly_list =
@@ -504,7 +504,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let poly_1 = Polynomial::from_container(vec![1_u8, 2, 3]);
     /// let poly_2 = Polynomial::from_container(vec![0, 1, 1]);
     /// let mut res = Polynomial::from_container(vec![1, 0, 253]);
@@ -557,7 +557,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let poly = Polynomial::from_container(vec![1_u8, 2, 3]);
     /// let bin_poly = Polynomial::from_container(vec![0, 1, 1]);
     /// let mut res = Polynomial::from_container(vec![255, 255, 1]);
@@ -611,7 +611,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let mut first = Polynomial::from_container(vec![1u8, 2, 3]);
     /// let second = Polynomial::from_container(vec![255u8, 255, 255]);
     /// first.update_with_wrapping_add(&second);
@@ -638,7 +638,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let mut first = Polynomial::from_container(vec![1u8, 2, 3]);
     /// let second = Polynomial::from_container(vec![4u8, 5, 6]);
     /// first.update_with_wrapping_sub(&second);
@@ -675,7 +675,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Examples
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let mut poly = Polynomial::from_container(vec![1u8, 2, 3]);
     /// poly.update_with_wrapping_monic_monomial_mul(MonomialDegree(2));
     /// assert_eq!(*poly.get_monomial(MonomialDegree(0)).get_coefficient(), 254);
@@ -711,7 +711,7 @@ impl<Cont> Polynomial<Cont> {
     /// # Examples
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{MonomialDegree, Polynomial};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{MonomialDegree, Polynomial};
     /// let mut poly = Polynomial::from_container(vec![1u8, 2, 3]);
     /// poly.update_with_wrapping_unit_monomial_div(MonomialDegree(2));
     /// assert_eq!(*poly.get_monomial(MonomialDegree(0)).get_coefficient(), 3);
@@ -748,7 +748,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, Polynomial, PolynomialList,
     /// };
     /// let mut poly = Polynomial::from_container(vec![1u8, 2, 3]);
@@ -778,7 +778,7 @@ impl<Cont> Polynomial<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, Polynomial, PolynomialList,
     /// };
     /// let mut poly = Polynomial::from_container(vec![1u32, 2, 3]);

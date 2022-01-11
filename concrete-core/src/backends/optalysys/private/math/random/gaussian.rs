@@ -1,6 +1,6 @@
 use concrete_commons::numeric::{CastInto, Numeric};
 
-use crate::backends::core::private::math::torus::{FromTorus, UnsignedTorus};
+use crate::backends::optalysys::private::math::torus::{FromTorus, UnsignedTorus};
 
 use super::*;
 

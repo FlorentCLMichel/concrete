@@ -1,4 +1,4 @@
-use crate::backends::core::private::math::tensor::Tensor;
+use crate::backends::optalysys::private::math::tensor::Tensor;
 
 use super::{AsMutSlice, AsRefSlice};
 
@@ -8,7 +8,7 @@ use super::{AsMutSlice, AsRefSlice};
 /// collections of various kind. In essence, this trait allows to extract a tensor properly
 /// qualified to use all the methods of the `Tensor` type:
 /// ```rust
-/// use concrete_core::backends::core::private::math::tensor::{AsRefSlice, AsRefTensor, Tensor};
+/// use concrete_core::backends::optalysys::private::math::tensor::{AsRefSlice, AsRefTensor, Tensor};
 ///
 /// pub struct Matrix<Cont> {
 ///     tensor: Tensor<Cont>,

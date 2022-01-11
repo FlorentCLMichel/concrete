@@ -1,8 +1,8 @@
-use crate::backends::core::private::math::random::{
+use crate::backends::optalysys::private::math::random::{
     Gaussian, RandomGenerable, Uniform, UniformBinary, UniformLsb, UniformMsb, UniformTernary,
     UniformWithZeros,
 };
-use crate::backends::core::private::math::tensor::{AsMutSlice, AsMutTensor, Tensor};
+use crate::backends::optalysys::private::math::tensor::{AsMutSlice, AsMutTensor, Tensor};
 use concrete_commons::numeric::{FloatingPoint, Numeric};
 use concrete_csprng::RandomGenerator as RandomGeneratorImpl;
 #[cfg(feature = "multithread")]
@@ -24,7 +24,7 @@ use rayon::prelude::*;
 /// used by the different threads safely:
 ///
 /// ```rust
-/// use concrete_core::backends::core::private::math::random::RandomGenerator;
+/// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
 /// let mut parent_generator = RandomGenerator::new(None);
 /// assert_eq!(parent_generator.remaining_bytes(), None); // The generator is unbounded.
 /// let children = parent_generator
@@ -61,7 +61,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// assert!(!generator.is_bounded());
     /// ```
@@ -74,7 +74,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// assert_eq!(generator.remaining_bytes(), None);
     /// let mut generator = generator.try_fork(1, 50).unwrap().next().unwrap();
@@ -89,7 +89,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// assert!(!generator.is_bounded());
     /// let mut generator = generator.try_fork(1, 50).unwrap().next().unwrap();
@@ -106,7 +106,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut free_generator = RandomGenerator::new(None);
     /// let children = free_generator.try_fork(5, 50).unwrap().collect::<Vec<_>>();
     /// ```
@@ -133,7 +133,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut free_generator = RandomGenerator::new(None);
     /// let children = free_generator.try_fork(5, 50).unwrap().collect::<Vec<_>>();
     /// ```
@@ -153,7 +153,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     ///
     /// let random = generator.random_uniform::<u8>();
@@ -177,8 +177,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(1000. as u32, 100);
     /// generator.fill_tensor_with_random_uniform(&mut tensor);
@@ -196,8 +196,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let t: Tensor<Vec<u64>> = generator.random_uniform_tensor(10);
     /// assert_eq!(t.len(), 10);
@@ -218,7 +218,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// let random: u32 = generator.random_uniform_binary();
     /// ```
@@ -231,8 +231,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(1u32, 100);
     /// generator.fill_tensor_with_random_uniform_binary(&mut tensor);
@@ -252,8 +252,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let t: Tensor<Vec<u32>> = generator.random_uniform_binary_tensor(10);
     /// assert_eq!(t.len(), 10);
@@ -270,7 +270,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// let random: u32 = generator.random_uniform_ternary();
     /// ```
@@ -283,8 +283,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(1u32, 100);
     /// generator.fill_tensor_with_random_uniform_ternary(&mut tensor);
@@ -304,8 +304,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let t: Tensor<Vec<u32>> = generator.random_uniform_ternary_tensor(10);
     /// assert_eq!(t.len(), 10);
@@ -323,7 +323,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// let random: u8 = generator.random_uniform_n_lsb(3);
     /// assert!(random <= 7 as u8);
@@ -340,8 +340,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(0 as u8, 100);
     /// generator.fill_tensor_with_random_uniform_n_lsb(&mut tensor, 3);
@@ -362,8 +362,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let t: Tensor<Vec<u64>> = generator.random_uniform_n_lsb_tensor(10, 55);
     /// assert_eq!(t.len(), 10);
@@ -386,7 +386,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// let random: u8 = generator.random_uniform_n_msb(3);
     /// assert!(random == 0 || random >= 32);
@@ -403,8 +403,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(8 as u8, 100);
     /// generator.fill_tensor_with_random_uniform_n_msb(&mut tensor, 5);
@@ -425,8 +425,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let t: Tensor<Vec<u64>> = generator.random_uniform_n_msb_tensor(10, 55);
     /// assert_eq!(t.len(), 10);
@@ -449,7 +449,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// let random = generator.random_uniform_with_zeros::<u8>(0.5);
     /// let random = generator.random_uniform_with_zeros::<u16>(0.5);
@@ -472,8 +472,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(10 as u8, 100);
     /// generator.fill_tensor_with_random_uniform_with_zeros(&mut tensor, 0.5);
@@ -497,8 +497,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let t: Tensor<Vec<u64>> = generator.random_uniform_with_zeros_tensor(10, 0.);
     /// assert_eq!(t.len(), 10);
@@ -522,7 +522,7 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
     /// let mut generator = RandomGenerator::new(None);
     /// // for f32
     /// let (g1, g2): (f32, f32) = generator.random_gaussian(0. as f32, 1. as f32);
@@ -548,8 +548,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let mut tensor = Tensor::allocate(1000. as f32, 100);
     /// generator.fill_tensor_with_random_gaussian(&mut tensor, 0., 1.);
@@ -586,8 +586,8 @@ impl RandomGenerator {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::random::RandomGenerator;
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::random::RandomGenerator;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut generator = RandomGenerator::new(None);
     /// let tensor: Tensor<Vec<f32>> = generator.random_gaussian_tensor(10_000, 0. as f32, 1. as f32);
     /// assert_eq!(tensor.len(), 10_000);

@@ -12,7 +12,7 @@
 //! traits which allow to go back and forth between an unsigned integer representation and a
 //! floating point representation.
 
-use crate::backends::core::private::math::random::{
+use crate::backends::optalysys::private::math::random::{
     Gaussian, RandomGenerable, Uniform, UniformBinary, UniformTernary,
 };
 use concrete_commons::dispersion::LogStandardDev;

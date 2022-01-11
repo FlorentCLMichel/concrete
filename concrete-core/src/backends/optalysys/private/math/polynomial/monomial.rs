@@ -1,4 +1,4 @@
-use crate::backends::core::private::math::tensor::{
+use crate::backends::optalysys::private::math::tensor::{
     tensor_traits, AsMutElement, AsMutTensor, AsRefElement, AsRefSlice, AsRefTensor, Tensor,
 };
 use concrete_commons::parameters::MonomialDegree;
@@ -11,7 +11,7 @@ use concrete_commons::parameters::MonomialDegree;
 ///
 /// ```
 /// use concrete_commons::parameters::MonomialDegree;
-/// use concrete_core::backends::core::private::math::polynomial::Monomial;
+/// use concrete_core::backends::optalysys::private::math::polynomial::Monomial;
 /// let mono = Monomial::allocate(1u8, MonomialDegree(5));
 /// assert_eq!(*mono.get_coefficient(), 1u8);
 /// assert_eq!(mono.degree(), MonomialDegree(5));
@@ -50,7 +50,7 @@ impl<Coef> Monomial<Vec<Coef>> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{Monomial, MonomialDegree};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{Monomial, MonomialDegree};
     /// let mono = Monomial::allocate(1u8, MonomialDegree(5));
     /// assert_eq!(*mono.get_coefficient(), 1u8);
     /// assert_eq!(mono.degree(), MonomialDegree(5));
@@ -69,7 +69,7 @@ impl<Cont> Monomial<Cont> {
     /// # Examples
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{Monomial, MonomialDegree};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{Monomial, MonomialDegree};
     /// let vector = vec![1u8];
     /// let mono = Monomial::from_container(vector.as_slice(), MonomialDegree(5));
     /// assert_eq!(*mono.get_coefficient(), 1u8);
@@ -94,7 +94,7 @@ impl<Cont> Monomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{Monomial, MonomialDegree};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{Monomial, MonomialDegree};
     /// let mono = Monomial::allocate(1u8, MonomialDegree(5));
     /// assert_eq!(*mono.get_coefficient(), 1u8);
     /// ```
@@ -110,7 +110,7 @@ impl<Cont> Monomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{Monomial, MonomialDegree};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{Monomial, MonomialDegree};
     /// let mut mono = Monomial::allocate(1u8, MonomialDegree(5));
     /// mono.set_coefficient(5u8);
     /// assert_eq!(*mono.get_coefficient(), 5u8);
@@ -127,7 +127,7 @@ impl<Cont> Monomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{Monomial, MonomialDegree};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{Monomial, MonomialDegree};
     /// let mut mono = Monomial::allocate(1u8, MonomialDegree(5));
     /// *mono.get_mut_coefficient() += 1u8;
     /// assert_eq!(*mono.get_coefficient(), 2u8);
@@ -144,7 +144,7 @@ impl<Cont> Monomial<Cont> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::polynomial::{Monomial, MonomialDegree};
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{Monomial, MonomialDegree};
     /// let mono = Monomial::allocate(1u8, MonomialDegree(5));
     /// assert_eq!(mono.degree(), MonomialDegree(5));
     /// ```

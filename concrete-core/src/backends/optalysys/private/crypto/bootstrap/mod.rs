@@ -3,9 +3,11 @@
 //! The bootstrapping operation allows to reduce the level of noise in an LWE ciphertext, while
 //! evaluating an univariate function.
 
-pub use fourier::FourierBootstrapKey;
+pub use fourier::{FourierBootstrapKey, FourierBskBuffers};
+pub use standard::StandardBootstrapKey;
 
 pub(crate) mod fourier;
+pub(crate) mod standard;
 
 #[cfg(all(test, feature = "multithread"))]
 mod test {
@@ -14,32 +16,32 @@ mod test {
         DecompositionBaseLog, DecompositionLevelCount, GlweDimension, LweDimension, PolynomialSize,
     };
 
-    use crate::backends::core::private::crypto::bootstrap::StandardBootstrapKey;
-    use crate::backends::core::private::crypto::secret::generators::{
+    use crate::backends::optalysys::private::crypto::bootstrap::StandardBootstrapKey;
+    use crate::backends::optalysys::private::crypto::secret::generators::{
         EncryptionRandomGenerator, SecretRandomGenerator,
     };
-    use crate::backends::core::private::crypto::secret::{GlweSecretKey, LweSecretKey};
-    use crate::backends::core::private::math::torus::UnsignedTorus;
+    use crate::backends::optalysys::private::crypto::secret::{GlweSecretKey, LweSecretKey};
+    use crate::backends::optalysys::private::math::torus::UnsignedTorus;
 
     fn test_bsk_gen_equivalence<T: UnsignedTorus + Send + Sync>() {
         for _ in 0..10 {
             let lwe_dim = LweDimension(
-                crate::backends::core::private::test_tools::random_usize_between(5..10),
+                crate::backends::optalysys::private::test_tools::random_usize_between(5..10),
             );
             let glwe_dim = GlweDimension(
-                crate::backends::core::private::test_tools::random_usize_between(5..10),
+                crate::backends::optalysys::private::test_tools::random_usize_between(5..10),
             );
             let poly_size = PolynomialSize(
-                crate::backends::core::private::test_tools::random_usize_between(5..10),
+                crate::backends::optalysys::private::test_tools::random_usize_between(5..10),
             );
             let level = DecompositionLevelCount(
-                crate::backends::core::private::test_tools::random_usize_between(2..5),
+                crate::backends::optalysys::private::test_tools::random_usize_between(2..5),
             );
             let base_log = DecompositionBaseLog(
-                crate::backends::core::private::test_tools::random_usize_between(2..5),
+                crate::backends::optalysys::private::test_tools::random_usize_between(2..5),
             );
-            let mask_seed = crate::backends::core::private::test_tools::any_usize() as u128;
-            let noise_seed = crate::backends::core::private::test_tools::any_usize() as u128;
+            let mask_seed = crate::backends::optalysys::private::test_tools::any_usize() as u128;
+            let noise_seed = crate::backends::optalysys::private::test_tools::any_usize() as u128;
 
             let mut secret_generator = SecretRandomGenerator::new(None);
             let lwe_sk = LweSecretKey::generate_binary(lwe_dim, &mut secret_generator);

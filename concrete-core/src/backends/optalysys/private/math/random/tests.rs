@@ -1,9 +1,9 @@
 use concrete_commons::dispersion::LogStandardDev;
 
-use crate::backends::core::private::math::random::RandomGenerator;
-use crate::backends::core::private::math::tensor::Tensor;
-use crate::backends::core::private::math::torus::UnsignedTorus;
-use crate::backends::core::private::test_tools::assert_noise_distribution;
+use crate::backends::optalysys::private::math::random::RandomGenerator;
+use crate::backends::optalysys::private::math::tensor::Tensor;
+use crate::backends::optalysys::private::math::torus::UnsignedTorus;
+use crate::backends::optalysys::private::test_tools::assert_noise_distribution;
 
 fn test_normal_random<T: UnsignedTorus>() {
     //! test if the normal random generation with std_dev is below 3*std_dev (99.7%)

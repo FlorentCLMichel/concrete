@@ -5,7 +5,7 @@
 //!
 //! + `core` : A single threaded CPU backend geared towards x86_64 architectures.
 
-#[cfg(feature = "backend_core")]
+#[cfg(all(feature = "backend_core", not(feature = "backend_optalysys")))]
 pub mod core;
 
 #[cfg(feature = "backend_optalysys")]

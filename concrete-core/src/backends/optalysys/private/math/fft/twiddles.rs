@@ -3,7 +3,7 @@
 use concrete_fftw::types::*;
 
 use super::Complex64;
-use crate::backends::core::private::math::tensor::{tensor_traits, Tensor};
+use crate::backends::optalysys::private::math::tensor::{tensor_traits, Tensor};
 
 /// Correcting factors for the forward transform.
 #[derive(Debug, Clone)]

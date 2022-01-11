@@ -1,6 +1,6 @@
 use std::iter::Iterator;
 
-use crate::backends::core::private::math::tensor::{
+use crate::backends::optalysys::private::math::tensor::{
     ck_dim_div, tensor_traits, AsMutTensor, AsRefSlice, AsRefTensor, Tensor,
 };
 
@@ -16,7 +16,7 @@ use concrete_commons::parameters::{MonomialDegree, PolynomialCount, PolynomialSi
 ///
 /// ```
 /// use concrete_commons::parameters::{PolynomialCount, PolynomialSize};
-/// use concrete_core::backends::core::private::math::polynomial::PolynomialList;
+/// use concrete_core::backends::optalysys::private::math::polynomial::PolynomialList;
 /// let list = PolynomialList::from_container(vec![1u8, 2, 3, 4, 5, 6, 7, 8], PolynomialSize(2));
 /// assert_eq!(list.polynomial_count(), PolynomialCount(4));
 /// assert_eq!(list.polynomial_size(), PolynomialSize(2));
@@ -39,7 +39,7 @@ where
     ///
     /// ```
     /// use concrete_commons::parameters::{PolynomialCount, PolynomialSize};
-    /// use concrete_core::backends::core::private::math::polynomial::PolynomialList;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::PolynomialList;
     /// let list = PolynomialList::allocate(1u8, PolynomialCount(10), PolynomialSize(2));
     /// assert_eq!(list.polynomial_count(), PolynomialCount(10));
     /// assert_eq!(list.polynomial_size(), PolynomialSize(2));
@@ -59,7 +59,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::{PolynomialCount, PolynomialSize};
-    /// use concrete_core::backends::core::private::math::polynomial::PolynomialList;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::PolynomialList;
     /// let list = PolynomialList::from_container(vec![1u8, 2, 3, 4, 5, 6, 7, 8], PolynomialSize(2));
     /// assert_eq!(list.polynomial_count(), PolynomialCount(4));
     /// assert_eq!(list.polynomial_size(), PolynomialSize(2));
@@ -81,7 +81,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::{PolynomialCount, PolynomialSize};
-    /// use concrete_core::backends::core::private::math::polynomial::PolynomialList;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::PolynomialList;
     /// let list = PolynomialList::allocate(1u8, PolynomialCount(10), PolynomialSize(2));
     /// assert_eq!(list.polynomial_count(), PolynomialCount(10));
     /// ```
@@ -98,7 +98,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::{PolynomialCount, PolynomialSize};
-    /// use concrete_core::backends::core::private::math::polynomial::PolynomialList;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::PolynomialList;
     /// let list = PolynomialList::allocate(1u8, PolynomialCount(10), PolynomialSize(2));
     /// assert_eq!(list.polynomial_size(), PolynomialSize(2));
     /// ```
@@ -112,7 +112,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, PolynomialList,
     /// };
     /// let list = PolynomialList::from_container(vec![1u8, 2, 3, 4, 5, 6, 7, 8], PolynomialSize(2));
@@ -137,7 +137,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, PolynomialList,
     /// };
     /// let mut list =
@@ -176,7 +176,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::PolynomialList;
+    /// use concrete_core::backends::optalysys::private::math::polynomial::PolynomialList;
     /// let mut list =
     ///     PolynomialList::from_container(vec![1u8, 2, 3, 4, 5, 6, 7, 8], PolynomialSize(2));
     /// for polynomial in list.polynomial_iter() {
@@ -201,7 +201,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, PolynomialList,
     /// };
     /// let mut list =
@@ -239,7 +239,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, PolynomialList,
     /// };
     /// let mut list = PolynomialList::from_container(vec![1u8, 2, 3, 4, 5, 6], PolynomialSize(3));
@@ -266,7 +266,7 @@ impl<Cont> PolynomialList<Cont> {
     ///
     /// ```
     /// use concrete_commons::parameters::PolynomialSize;
-    /// use concrete_core::backends::core::private::math::polynomial::{
+    /// use concrete_core::backends::optalysys::private::math::polynomial::{
     ///     MonomialDegree, PolynomialList,
     /// };
     /// let mut list = PolynomialList::from_container(vec![1u8, 2, 3, 4, 5, 6], PolynomialSize(3));

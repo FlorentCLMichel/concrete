@@ -4,7 +4,7 @@ macro_rules! save_load_unsigned {
     ($T:ty, $name: ident) => {
         mod $name {
             use super::super::Tensor;
-            use crate::backends::core::private::math::random;
+            use crate::backends::optalysys::private::math::random;
             use rand;
 
             #[test]

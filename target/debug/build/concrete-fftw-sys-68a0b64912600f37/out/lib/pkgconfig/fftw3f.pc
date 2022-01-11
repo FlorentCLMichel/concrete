@@ -1,0 +1,11 @@
+prefix=/home/florent/zama_optalysys_plugin/concrete/target/debug/build/concrete-fftw-sys-68a0b64912600f37/out
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: FFTW
+Description: fast Fourier transform library
+Version: 3.3.8
+Libs: -L${libdir} -lfftw3f 
+Libs.private: -lm
+Cflags: -I${includedir}

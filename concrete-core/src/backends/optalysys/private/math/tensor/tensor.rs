@@ -8,7 +8,7 @@ use std::slice::SliceIndex;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 
-use crate::backends::core::private::utils::zip;
+use crate::backends::optalysys::private::utils::zip;
 
 use super::{AsMutSlice, AsMutTensor, AsRefSlice, AsRefTensor, LoadError, SaveError};
 
@@ -36,7 +36,7 @@ impl<Element> Tensor<Vec<Element>> {
     /// Allocates a new `Tensor<Vec<T>>` whose values are all `value`.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// assert_eq!(tensor.len(), 1000);
     /// assert_eq!(*tensor.get_element(0), 9);
@@ -57,7 +57,7 @@ impl<Element> Tensor<Vec<Element>> {
     ///
     /// # Example
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use std::path::PathBuf;
     /// let t = Tensor::allocate(66 as u8, 10_000);
     /// let path = PathBuf::from("/tmp/test_save_tensor.ts");
@@ -89,7 +89,7 @@ impl<Element> Tensor<Vec<Element>> {
     ///
     /// # Example
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use std::path::PathBuf;
     /// let t_initial = Tensor::allocate(66 as u8, 10_000);
     /// let path = PathBuf::from("/tmp/test_save_tensor.ts");
@@ -222,7 +222,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let vec = vec![9 as u8; 1000];
     /// let view = vec.as_slice();
     /// let tensor = Tensor::from_container(view);
@@ -239,7 +239,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// let vec = tensor.into_container();
     /// assert_eq!(vec.len(), 1000);
@@ -255,7 +255,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// let vecref: &Vec<_> = tensor.as_container();
     /// ```
@@ -268,7 +268,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// let vecmut: &mut Vec<_> = tensor.as_mut_container();
     /// ```
@@ -280,7 +280,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// assert_eq!(tensor.len(), 1000);
     /// ```
@@ -295,7 +295,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// assert_eq!(tensor.is_empty(), false);
     /// ```
@@ -310,7 +310,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// for scalar in tensor.iter() {
     ///     assert_eq!(*scalar, 9);
@@ -332,7 +332,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use rayon::iter::ParallelIterator;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.par_iter().for_each(|scalar| {
@@ -352,7 +352,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// for mut scalar in tensor.iter_mut() {
     ///     *scalar = 8;
@@ -377,7 +377,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.iter_mut().for_each(|mut scalar| {
     ///     *scalar = 8;
@@ -404,7 +404,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// for sub in tensor.subtensor_iter(10) {
     ///     assert_eq!(sub.len(), 10);
@@ -429,7 +429,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use rayon::iter::ParallelIterator;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.par_subtensor_iter(10).for_each(|sub| {
@@ -456,7 +456,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// for mut sub in tensor.subtensor_iter_mut(10) {
     ///     assert_eq!(sub.len(), 10);
@@ -489,7 +489,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use rayon::iter::ParallelIterator;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.par_subtensor_iter_mut(10).for_each(|mut sub| {
@@ -525,7 +525,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// assert_eq!(*tensor.first(), 9);
     /// ```
@@ -545,7 +545,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// assert_eq!(*tensor.last(), 9);
     /// ```
@@ -565,7 +565,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// *tensor.first_mut() = 8;
     /// assert_eq!(*tensor.get_element(0), 8);
@@ -587,7 +587,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// *tensor.last_mut() = 8;
     /// assert_eq!(*tensor.get_element(999), 8);
@@ -609,7 +609,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// let (first, end) = tensor.split_first();
     /// assert_eq!(*first, 9);
@@ -633,7 +633,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// let (last, beginning) = tensor.split_last();
     /// assert_eq!(*last, 9);
@@ -658,7 +658,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// let (mut first, mut end) = tensor.split_first_mut();
     /// *first = 8;
@@ -686,7 +686,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example:
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// let (mut last, mut beginning) = tensor.split_last_mut();
     /// *last = 8;
@@ -714,7 +714,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// let sub = tensor.get_sub(0..3);
     /// assert_eq!(sub.len(), 3);
@@ -737,7 +737,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// let mut sub = tensor.get_sub_mut(0..3);
     /// sub.fill_with_element(0);
@@ -765,7 +765,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let tensor = Tensor::allocate(9 as u8, 1000);
     /// assert_eq!(*tensor.get_element(0), 9);
     /// ```
@@ -785,7 +785,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// *tensor.get_element_mut(0) = 8;
     /// assert_eq!(*tensor.get_element(0), 8);
@@ -807,7 +807,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// *tensor.get_element_mut(0) = 8;
     /// assert_eq!(*tensor.get_element(0), 8);
@@ -825,7 +825,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor1 = Tensor::allocate(9 as u8, 1000);
     /// let tensor2 = Tensor::allocate(10 as u8, 1000);
     /// tensor1.fill_with_copy(&tensor2);
@@ -846,7 +846,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor1 = Tensor::allocate(9 as u8, 1000);
     /// let mut tensor2 = Tensor::allocate(9 as u8, 1000);
     /// let tensor3 = Tensor::allocate(10 as u8, 1000);
@@ -882,7 +882,7 @@ impl<Container> Tensor<Container> {
     /// the same size
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(1 as u8, 1000);
     /// let t3 = Tensor::allocate(2 as u8, 1000);
@@ -919,7 +919,7 @@ impl<Container> Tensor<Container> {
     /// the same size
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(2 as u8, 1000);
     /// t1.fill_with_one(&t2, |t2| t2.pow(2));
@@ -944,7 +944,7 @@ impl<Container> Tensor<Container> {
     /// Fills a mutable tensor with an element.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.fill_with_element(8);
     /// for scalar in tensor.iter() {
@@ -964,7 +964,7 @@ impl<Container> Tensor<Container> {
     /// Fills a mutable tensor by repeatedly calling a closure.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use std::cell::RefCell;
     /// let mut tensor = Tensor::allocate(9 as u16, 1000);
     /// let mut boxed = RefCell::from(0);
@@ -988,7 +988,7 @@ impl<Container> Tensor<Container> {
     /// Fills a mutable tensor by casting elements of another one.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u16, 1000);
     /// let mut t2 = Tensor::allocate(8. as f32, 1000);
     /// t1.fill_with_cast(&t2);
@@ -1028,7 +1028,7 @@ impl<Container> Tensor<Container> {
     /// # Example:
     ///
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor1 = Tensor::allocate(9 as u8, 1000);
     /// let mut tensor2 = Tensor::allocate(9 as u8, 1000);
     /// let tensor3 = Tensor::allocate(10 as u8, 1000);
@@ -1064,7 +1064,7 @@ impl<Container> Tensor<Container> {
     /// tensors of the same size.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(1 as u8, 1000);
     /// let t3 = Tensor::allocate(2 as u8, 1000);
@@ -1102,7 +1102,7 @@ impl<Container> Tensor<Container> {
     /// of the same size
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(2 as u8, 1000);
     /// t1.update_with_one(&t2, |t1, t2| *t1 += t2.pow(2));
@@ -1127,7 +1127,7 @@ impl<Container> Tensor<Container> {
     /// Updates a mutable tensor with an element.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.update_with_element(8, |t, s| *t += s);
     /// for scalar in tensor.iter() {
@@ -1150,7 +1150,7 @@ impl<Container> Tensor<Container> {
     /// Updates a mutable tensor by repeatedly calling a closure.
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// use std::cell::RefCell;
     /// let mut tensor = Tensor::allocate(9 as u16, 1000);
     /// let mut boxed = RefCell::from(0);
@@ -1211,7 +1211,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as i16, 1000);
     /// tensor.update_with_neg();
     /// for scalar in tensor.iter() {
@@ -1230,7 +1230,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::allocate(9 as u8, 1000);
     /// tensor.update_with_wrapping_neg();
     /// for scalar in tensor.iter() {
@@ -1250,7 +1250,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(3 as u8, 1000);
     /// t1.fill_with_element_mul(&t2, 2);
@@ -1275,7 +1275,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(3 as u8, 1000);
     /// t1.fill_with_wrapping_element_mul(&t2, 250);
@@ -1301,7 +1301,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(2 as u8, 1000);
     /// t1.update_with_sub_element_mul(&t2, 4);
@@ -1330,7 +1330,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(2 as u8, 1000);
     /// t1.update_with_wrapping_sub_element_mul(&t2, 250);
@@ -1356,7 +1356,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(2 as u8, 1000);
     /// t1.update_with_add_element_mul(&t2, 4);
@@ -1385,7 +1385,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut t1 = Tensor::allocate(9 as u8, 1000);
     /// let t2 = Tensor::allocate(2 as u8, 1000);
     /// t1.update_with_wrapping_add_element_mul(&t2, 250);
@@ -1410,7 +1410,7 @@ impl<Container> Tensor<Container> {
     ///
     /// # Example
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let t1 = Tensor::allocate(10 as u16, 10);
     /// let t2 = Tensor::allocate(2 as u16, 10);
     /// let val = t1.fold_with_one(&t2, 0, |mut a, t1, t2| {
@@ -1444,7 +1444,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///  
     /// ```rust
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::from_container(vec![1u8, 2, 3, 4]);
     /// tensor.reverse();
     /// assert_eq!(*tensor.get_element(0), 4);
@@ -1461,7 +1461,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::from_container(vec![1u8, 2, 3, 4]);
     /// tensor.rotate_right(2);
     /// assert_eq!(*tensor.get_element(0), 3);
@@ -1478,7 +1478,7 @@ impl<Container> Tensor<Container> {
     /// # Example
     ///
     /// ```
-    /// use concrete_core::backends::core::private::math::tensor::Tensor;
+    /// use concrete_core::backends::optalysys::private::math::tensor::Tensor;
     /// let mut tensor = Tensor::from_container(vec![1u8, 2, 3, 4]);
     /// tensor.rotate_left(2);
     /// assert_eq!(*tensor.get_element(0), 3);

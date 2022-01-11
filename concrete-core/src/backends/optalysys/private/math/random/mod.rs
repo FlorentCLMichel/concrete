@@ -13,7 +13,7 @@
 //! implementations of this trait, for different distributions. Note, though, that instead of
 //! using the [`RandomGenerable`] methods, you should use the various methods exposed by
 //! [`RandomGenerator`] instead.
-use crate::backends::core::private::math::tensor::{AsMutTensor, Tensor};
+use crate::backends::optalysys::private::math::tensor::{AsMutTensor, Tensor};
 use concrete_commons::numeric::FloatingPoint;
 pub use gaussian::*;
 pub use generator::*;

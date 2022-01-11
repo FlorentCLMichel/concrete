@@ -4,7 +4,7 @@
 //! wraps a data container, and provides a set of methods to operate with other tensors of
 //! the same length:
 //! ```
-//! use concrete_core::backends::core::private::math::tensor::Tensor;
+//! use concrete_core::backends::optalysys::private::math::tensor::Tensor;
 //! // We allocate two tensors of size 10
 //! let mut tensor1 = Tensor::allocate(5. as f32, 10);
 //! let tensor2 = Tensor::allocate(3. as f32, 10);
@@ -16,7 +16,7 @@
 //! such as `Vec<T>`, `&mut [T]` or `&[T]`. Operations can homogeneously be applied to tensors
 //! backed by different containers:
 //! ```
-//! use concrete_core::backends::core::private::math::tensor::Tensor;
+//! use concrete_core::backends::optalysys::private::math::tensor::Tensor;
 //! // `allocate` returns a tensor backed by a `Vec`
 //! let tensor1: Tensor<Vec<u32>> = Tensor::allocate(5, 100);
 //! // `from_cont` allows you to create a tensor from any container
@@ -34,7 +34,7 @@
 //! several structures representing multi-dimensional collections. The pattern we use for such
 //! structures is pretty simple:
 //! ```
-//! use concrete_core::backends::core::private::math::tensor::{AsRefSlice, AsRefTensor, Tensor};
+//! use concrete_core::backends::optalysys::private::math::tensor::{AsRefSlice, AsRefTensor, Tensor};
 //!
 //! // We want to have a matrix structure stored row-major.
 //! pub struct Matrix<Cont> {
@@ -73,10 +73,10 @@
 // question must be a structure with a `tensor` field.
 macro_rules! tensor_traits {
     ($Type:ident) => {
-        impl<Element, Cont> $crate::backends::core::private::math::tensor::AsRefTensor
+        impl<Element, Cont> $crate::backends::optalysys::private::math::tensor::AsRefTensor
             for $Type<Cont>
         where
-            Cont: $crate::backends::core::private::math::tensor::AsRefSlice<Element = Element>,
+            Cont: $crate::backends::optalysys::private::math::tensor::AsRefSlice<Element = Element>,
         {
             type Element = Element;
             type Container = Cont;
@@ -85,28 +85,28 @@ macro_rules! tensor_traits {
             }
         }
 
-        impl<Element, Cont> $crate::backends::core::private::math::tensor::AsMutTensor
+        impl<Element, Cont> $crate::backends::optalysys::private::math::tensor::AsMutTensor
             for $Type<Cont>
         where
-            Cont: $crate::backends::core::private::math::tensor::AsMutSlice<Element = Element>,
+            Cont: $crate::backends::optalysys::private::math::tensor::AsMutSlice<Element = Element>,
         {
             type Element = Element;
             type Container = Cont;
             fn as_mut_tensor(
                 &mut self,
             ) -> &mut Tensor<
-                <Self as $crate::backends::core::private::math::tensor::AsMutTensor>::Container,
+                <Self as $crate::backends::optalysys::private::math::tensor::AsMutTensor>::Container,
             > {
                 &mut self.tensor
             }
         }
 
-        impl<Cont> $crate::backends::core::private::math::tensor::IntoTensor for $Type<Cont>
+        impl<Cont> $crate::backends::optalysys::private::math::tensor::IntoTensor for $Type<Cont>
         where
-            Cont: $crate::backends::core::private::math::tensor::AsRefSlice,
+            Cont: $crate::backends::optalysys::private::math::tensor::AsRefSlice,
         {
             type Element =
-                <Cont as $crate::backends::core::private::math::tensor::AsRefSlice>::Element;
+                <Cont as $crate::backends::optalysys::private::math::tensor::AsRefSlice>::Element;
             type Container = Cont;
             fn into_tensor(self) -> Tensor<Self::Container> {
                 self.tensor
@@ -130,7 +130,7 @@ pub(crate) use current_func_path;
 
 macro_rules! ck_dim_eq {
     ($tensor_size: expr => $($size: expr),* ) => {
-        let func = $crate::backends::core::private::math::tensor::current_func_path!();
+        let func = $crate::backends::optalysys::private::math::tensor::current_func_path!();
         $(
 
             debug_assert!(
@@ -151,7 +151,7 @@ pub(crate) use ck_dim_eq;
 macro_rules! ck_dim_div {
     ($tensor_size: expr => $($size: expr),* ) => {
         $(
-            let func = $crate::backends::core::private::math::tensor::current_func_path!();
+            let func = $crate::backends::optalysys::private::math::tensor::current_func_path!();
             debug_assert!(
                 $tensor_size % $size == 0,
                 "Called operation {} on tensors of incompatible size. {} (={:?}) does not divide \
