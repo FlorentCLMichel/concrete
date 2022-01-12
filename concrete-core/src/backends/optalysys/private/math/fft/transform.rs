@@ -1,7 +1,7 @@
 /* WARNING: Using the functions ft_inplace_stable_from_other_type and 
- * ift_inplace_stable_from_other_type is unsafe.
+ * ift_inplace_stable_ns_from_other_type is unsafe.
  *
- * TO DO: replace them by ft_inplace_stable and ift_inplace_stable
+ * TO DO: replace them by ft_inplace_stable and ift_inplace_stable_ns
  * TO DO: replace the `unwrap`s by proper error handling
  */
 
@@ -23,7 +23,7 @@ use crate::backends::optalysys::private::math::torus::UnsignedTorus;
 use crate::backends::optalysys::private::utils::zip;
 
 use super::{Complex64, Correctors, FourierPolynomial};
-use pseudo_graphec::prelude::{OFTSimulator1 as Simulator, FourierEngine};
+use proto_graphec::prelude::{OFTSimulator1 as Simulator, FourierEngine};
 use std::cell::RefCell;
 
 // Number of bits of accuracy for the OFT simulator.
@@ -531,7 +531,7 @@ impl Fft {
         }
 
         // We perform the backward fft
-        self.plans.ift_inplace_stable_from_other_type(
+        self.plans.ift_inplace_stable_ns_from_other_type(
             fourier_poly.as_tensor().as_slice(),
             self.buffer.borrow_mut().as_mut_tensor().as_mut_slice(),
         ).unwrap();
@@ -586,7 +586,7 @@ impl Fft {
         }
 
         // We perform the backward fft
-        self.plans.ift_inplace_stable_from_other_type(
+        self.plans.ift_inplace_stable_ns_from_other_type(
             fourier_poly_1.as_tensor().as_slice(),
             self.buffer.borrow_mut().as_mut_tensor().as_mut_slice(),
         ).unwrap();
