@@ -27,7 +27,7 @@ use proto_graphec::prelude::{OFTSimulator1 as Simulator, FourierEngine};
 use std::cell::RefCell;
 
 // Number of bits of accuracy for the OFT simulator.
-const ACCURACY: usize = 32;
+const ACCURACY: usize = 40;
 
 /// A fast fourier transformer.
 ///
