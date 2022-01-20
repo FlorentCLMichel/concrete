@@ -137,7 +137,7 @@ impl Default for Synthesizer {
     }
 }
 
-#[cfg(feature = "backend_core")]
+//#[cfg(feature = "backend_core")]
 mod core {
     use super::*;
     use concrete_commons::dispersion::Variance;

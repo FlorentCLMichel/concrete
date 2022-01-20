@@ -14,6 +14,8 @@ fn main() {
     // We instantiate the benchmarks for different backends depending on the feature flag activated.
     #[cfg(feature = "backend_core")]
     backends::core::bench();
+    #[cfg(feature = "backend_optalysys")]
+    backends::optalysys::bench();
 
     // We launch the benchmarks.
     criterion::Criterion::default()
