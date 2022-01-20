@@ -1,14 +1,14 @@
 use concrete_commons::parameters::LweDimension;
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{LweSecretKey32, LweSecretKey64};
 use crate::backends::optalysys::private::crypto::secret::LweSecretKey as ImplLweSecretKey;
 use crate::specification::engines::{LweSecretKeyCreationEngine, LweSecretKeyCreationError};
 
 /// # Description:
-/// Implementation of [`LweSecretKeyCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweSecretKeyCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
-impl LweSecretKeyCreationEngine<LweSecretKey32> for CoreEngine {
+impl LweSecretKeyCreationEngine<LweSecretKey32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::LweDimension;
@@ -19,7 +19,7 @@ impl LweSecretKeyCreationEngine<LweSecretKey32> for CoreEngine {
     /// // DISCLAIMER: the parameters used here are only for test purpose, and are not secure.
     /// let lwe_dimension = LweDimension(6);
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let lwe_secret_key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// #
     /// assert_eq!(lwe_secret_key.lwe_dimension(), lwe_dimension);
@@ -47,9 +47,9 @@ impl LweSecretKeyCreationEngine<LweSecretKey32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`LweSecretKeyCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweSecretKeyCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
-impl LweSecretKeyCreationEngine<LweSecretKey64> for CoreEngine {
+impl LweSecretKeyCreationEngine<LweSecretKey64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::LweDimension;
@@ -60,7 +60,7 @@ impl LweSecretKeyCreationEngine<LweSecretKey64> for CoreEngine {
     /// // DISCLAIMER: the parameters used here are only for test purpose, and are not secure.
     /// let lwe_dimension = LweDimension(6);
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let lwe_secret_key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// #
     /// assert_eq!(lwe_secret_key.lwe_dimension(), lwe_dimension);

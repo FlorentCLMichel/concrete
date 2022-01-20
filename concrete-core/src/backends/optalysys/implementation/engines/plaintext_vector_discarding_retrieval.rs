@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{PlaintextVector32, PlaintextVector64};
 use crate::backends::optalysys::private::math::tensor::AsRefTensor;
 use crate::specification::engines::{
@@ -7,9 +7,9 @@ use crate::specification::engines::{
 use crate::specification::entities::PlaintextVectorEntity;
 
 /// # Description:
-/// Implementation of [`PlaintextVectorDiscardingRetrievalEngine`] for [`CoreEngine`] that operates
+/// Implementation of [`PlaintextVectorDiscardingRetrievalEngine`] for [`OptalysysEngine`] that operates
 /// on 32 bits integers.
-impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector32, u32> for CoreEngine {
+impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::PlaintextCount;
@@ -21,7 +21,7 @@ impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector32, u32> for CoreEn
     /// let input = vec![3_u32 << 20; 3];
     /// let mut output = vec![0_u32; 3];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext_vector: PlaintextVector32 = engine.create_plaintext_vector(&input)?;
     /// engine.discard_retrieve_plaintext_vector(output.as_mut_slice(), &plaintext_vector)?;
     /// #
@@ -53,9 +53,9 @@ impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector32, u32> for CoreEn
 }
 
 /// # Description:
-/// Implementation of [`PlaintextVectorDiscardingRetrievalEngine`] for [`CoreEngine`] that operates
+/// Implementation of [`PlaintextVectorDiscardingRetrievalEngine`] for [`OptalysysEngine`] that operates
 /// on 64 bits integers.
-impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector64, u64> for CoreEngine {
+impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::PlaintextCount;
@@ -67,7 +67,7 @@ impl PlaintextVectorDiscardingRetrievalEngine<PlaintextVector64, u64> for CoreEn
     /// let input = vec![3_u64 << 20; 3];
     /// let mut output = vec![0_u64; 3];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext_vector: PlaintextVector64 = engine.create_plaintext_vector(&input)?;
     /// engine.discard_retrieve_plaintext_vector(output.as_mut_slice(), &plaintext_vector)?;
     /// #

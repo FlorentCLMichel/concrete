@@ -1,14 +1,14 @@
 use concrete_commons::parameters::{GlweDimension, PolynomialSize};
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{GlweSecretKey32, GlweSecretKey64};
 use crate::backends::optalysys::private::crypto::secret::GlweSecretKey as ImplGlweSecretKey;
 use crate::specification::engines::{GlweSecretKeyCreationEngine, GlweSecretKeyCreationError};
 
 /// # Description:
-/// Implementation of [`GlweSecretKeyCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`GlweSecretKeyCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
-impl GlweSecretKeyCreationEngine<GlweSecretKey32> for CoreEngine {
+impl GlweSecretKeyCreationEngine<GlweSecretKey32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::{GlweDimension, PolynomialSize};
@@ -20,7 +20,7 @@ impl GlweSecretKeyCreationEngine<GlweSecretKey32> for CoreEngine {
     /// let glwe_dimension = GlweDimension(2);
     /// let polynomial_size = PolynomialSize(4);
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let glwe_secret_key: GlweSecretKey32 =
     ///     engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     /// #
@@ -54,9 +54,9 @@ impl GlweSecretKeyCreationEngine<GlweSecretKey32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`GlweSecretKeyCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`GlweSecretKeyCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
-impl GlweSecretKeyCreationEngine<GlweSecretKey64> for CoreEngine {
+impl GlweSecretKeyCreationEngine<GlweSecretKey64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::{GlweDimension, PolynomialSize};
@@ -68,7 +68,7 @@ impl GlweSecretKeyCreationEngine<GlweSecretKey64> for CoreEngine {
     /// let glwe_dimension = GlweDimension(2);
     /// let polynomial_size = PolynomialSize(4);
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let glwe_secret_key: GlweSecretKey64 =
     ///     engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     /// #

@@ -1,6 +1,6 @@
 use concrete_commons::dispersion::Variance;
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     GlweCiphertextVector32, GlweCiphertextVector64, GlweSecretKey32, GlweSecretKey64,
     PlaintextVector32, PlaintextVector64,
@@ -13,14 +13,14 @@ use crate::specification::entities::{
 };
 
 /// # Description:
-/// Implementation of [`GlweCiphertextVectorDiscardingEncryptionEngine`] for [`CoreEngine`] that
+/// Implementation of [`GlweCiphertextVectorDiscardingEncryptionEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
 impl
     GlweCiphertextVectorDiscardingEncryptionEngine<
         GlweSecretKey32,
         PlaintextVector32,
         GlweCiphertextVector32,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -37,7 +37,7 @@ impl
     /// let input = vec![3_u32 << 20; 8];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key_1: GlweSecretKey32 =
     ///     engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     /// let key_2: GlweSecretKey32 =
@@ -107,14 +107,14 @@ impl
 }
 
 /// # Description:
-/// Implementation of [`GlweCiphertextVectorDiscardingEncryptionEngine`] for [`CoreEngine`] that
+/// Implementation of [`GlweCiphertextVectorDiscardingEncryptionEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
 impl
     GlweCiphertextVectorDiscardingEncryptionEngine<
         GlweSecretKey64,
         PlaintextVector64,
         GlweCiphertextVector64,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -131,7 +131,7 @@ impl
     /// let input = vec![3_u64 << 50; 8];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key_1: GlweSecretKey64 =
     ///     engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     /// let key_2: GlweSecretKey64 =

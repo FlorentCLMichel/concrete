@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     FourierLweBootstrapKey32, FourierLweBootstrapKey64, GlweCiphertext32, GlweCiphertext64,
     LweCiphertext32, LweCiphertext64,
@@ -11,7 +11,7 @@ use crate::specification::entities::{
 };
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingBootstrapEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweCiphertextDiscardingBootstrapEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
 impl
     LweCiphertextDiscardingBootstrapEngine<
@@ -19,7 +19,7 @@ impl
         GlweCiphertext32,
         LweCiphertext32,
         LweCiphertext32,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example
     /// ```
@@ -45,7 +45,7 @@ impl
     /// let lut = vec![8_u32 << 20; poly_size.0];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let lwe_sk: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dim)?;
     /// let glwe_sk: GlweSecretKey32 = engine.create_glwe_secret_key(glwe_dim, poly_size)?;
     /// let bsk: FourierLweBootstrapKey32 =
@@ -110,7 +110,7 @@ impl
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingBootstrapEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweCiphertextDiscardingBootstrapEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
 impl
     LweCiphertextDiscardingBootstrapEngine<
@@ -118,7 +118,7 @@ impl
         GlweCiphertext64,
         LweCiphertext64,
         LweCiphertext64,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example
     /// ```
@@ -144,7 +144,7 @@ impl
     /// let lut = vec![8_u64 << 50; poly_size.0];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let lwe_sk: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dim)?;
     /// let glwe_sk: GlweSecretKey64 = engine.create_glwe_secret_key(glwe_dim, poly_size)?;
     /// let bsk: FourierLweBootstrapKey64 =

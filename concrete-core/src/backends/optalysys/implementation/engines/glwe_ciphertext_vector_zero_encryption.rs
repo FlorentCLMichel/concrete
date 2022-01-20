@@ -1,7 +1,7 @@
 use concrete_commons::dispersion::Variance;
 use concrete_commons::parameters::{CiphertextCount, GlweCiphertextCount};
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     GlweCiphertextVector32, GlweCiphertextVector64, GlweSecretKey32, GlweSecretKey64,
 };
@@ -12,10 +12,10 @@ use crate::specification::engines::{
 use crate::specification::entities::GlweSecretKeyEntity;
 
 /// # Description:
-/// Implementation of [`GlweCiphertextVectorZeroEncryptionEngine`] for [`CoreEngine`] that operates
+/// Implementation of [`GlweCiphertextVectorZeroEncryptionEngine`] for [`OptalysysEngine`] that operates
 /// on 32 bits integers.
 impl GlweCiphertextVectorZeroEncryptionEngine<GlweSecretKey32, GlweCiphertextVector32>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -31,7 +31,7 @@ impl GlweCiphertextVectorZeroEncryptionEngine<GlweSecretKey32, GlweCiphertextVec
     /// let ciphertext_count = GlweCiphertextCount(3);
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: GlweSecretKey32 = engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     ///
     /// let ciphertext_vector =
@@ -82,10 +82,10 @@ impl GlweCiphertextVectorZeroEncryptionEngine<GlweSecretKey32, GlweCiphertextVec
 }
 
 /// # Description:
-/// Implementation of [`GlweCiphertextVectorZeroEncryptionEngine`] for [`CoreEngine`] that operates
+/// Implementation of [`GlweCiphertextVectorZeroEncryptionEngine`] for [`OptalysysEngine`] that operates
 /// on 64 bits integers.
 impl GlweCiphertextVectorZeroEncryptionEngine<GlweSecretKey64, GlweCiphertextVector64>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -101,7 +101,7 @@ impl GlweCiphertextVectorZeroEncryptionEngine<GlweSecretKey64, GlweCiphertextVec
     /// let ciphertext_count = GlweCiphertextCount(3);
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: GlweSecretKey64 = engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     ///
     /// let ciphertext_vector =

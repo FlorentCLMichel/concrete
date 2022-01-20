@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     Cleartext32, Cleartext64, LweCiphertext32, LweCiphertext64,
 };
@@ -8,9 +8,9 @@ use crate::specification::engines::{
 };
 
 /// # Description:
-/// Implementation of [`LweCiphertextCleartextFusingMultiplicationEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextCleartextFusingMultiplicationEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
-impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext32, Cleartext32> for CoreEngine {
+impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext32, Cleartext32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -26,7 +26,7 @@ impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext32, Cleartext
     /// let cleartext_input = 12_u32;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext32 = engine.create_cleartext(&cleartext_input)?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext = engine.create_plaintext(&input)?;
@@ -63,9 +63,9 @@ impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext32, Cleartext
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextCleartextFusingMultiplicationEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextCleartextFusingMultiplicationEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
-impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext64, Cleartext64> for CoreEngine {
+impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext64, Cleartext64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -81,7 +81,7 @@ impl LweCiphertextCleartextFusingMultiplicationEngine<LweCiphertext64, Cleartext
     /// let cleartext_input = 12_u64;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext64 = engine.create_cleartext(&cleartext_input)?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext = engine.create_plaintext(&input)?;

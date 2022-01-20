@@ -4,7 +4,7 @@
 //! `backend_*` naming), and to contain a benchmark function containing the benchmarking of every
 //! entry points exposed by the backend.
 
-#[cfg(feature = "backend_core")]
+#[cfg(all(feature = "backend_core", not(feature = "backend_optalysys")))]
 pub mod core;
 
 #[cfg(feature = "backend_optalysys")]

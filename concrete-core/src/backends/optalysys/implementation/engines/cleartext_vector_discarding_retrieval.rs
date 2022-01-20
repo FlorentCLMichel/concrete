@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{CleartextVector32, CleartextVector64};
 use crate::backends::optalysys::private::math::tensor::AsRefTensor;
 use crate::specification::engines::{
@@ -7,9 +7,9 @@ use crate::specification::engines::{
 use crate::specification::entities::CleartextVectorEntity;
 
 /// # Description:
-/// Implementation of [`CleartextVectorDiscardingRetrievalEngine`] for [`CoreEngine`] that operates
+/// Implementation of [`CleartextVectorDiscardingRetrievalEngine`] for [`OptalysysEngine`] that operates
 /// on 32 bits integers.
-impl CleartextVectorDiscardingRetrievalEngine<CleartextVector32, u32> for CoreEngine {
+impl CleartextVectorDiscardingRetrievalEngine<CleartextVector32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::CleartextCount;
@@ -20,7 +20,7 @@ impl CleartextVectorDiscardingRetrievalEngine<CleartextVector32, u32> for CoreEn
     /// let input = vec![3_u32; 100];
     /// let mut retrieved = vec![0_u32; 100];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext_vector: CleartextVector32 = engine.create_cleartext_vector(&input)?;
     /// engine.discard_retrieve_cleartext_vector(retrieved.as_mut_slice(), &cleartext_vector)?;
     ///
@@ -52,9 +52,9 @@ impl CleartextVectorDiscardingRetrievalEngine<CleartextVector32, u32> for CoreEn
 }
 
 /// # Description:
-/// Implementation of [`CleartextVectorDiscardingRetrievalEngine`] for [`CoreEngine`] that operates
+/// Implementation of [`CleartextVectorDiscardingRetrievalEngine`] for [`OptalysysEngine`] that operates
 /// on 32 bits integers.
-impl CleartextVectorDiscardingRetrievalEngine<CleartextVector64, u64> for CoreEngine {
+impl CleartextVectorDiscardingRetrievalEngine<CleartextVector64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::CleartextCount;
@@ -65,7 +65,7 @@ impl CleartextVectorDiscardingRetrievalEngine<CleartextVector64, u64> for CoreEn
     /// let input = vec![3_u64; 100];
     /// let mut retrieved = vec![0_u64; 100];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext_vector: CleartextVector64 = engine.create_cleartext_vector(&input)?;
     /// engine.discard_retrieve_cleartext_vector(retrieved.as_mut_slice(), &cleartext_vector)?;
     ///

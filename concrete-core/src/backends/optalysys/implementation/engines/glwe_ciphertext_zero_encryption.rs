@@ -1,6 +1,6 @@
 use concrete_commons::dispersion::Variance;
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     GlweCiphertext32, GlweCiphertext64, GlweSecretKey32, GlweSecretKey64,
 };
@@ -11,9 +11,9 @@ use crate::specification::engines::{
 use crate::specification::entities::GlweSecretKeyEntity;
 
 /// # Description:
-/// Implementation of [`GlweCiphertextZeroEncryptionEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`GlweCiphertextZeroEncryptionEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
-impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey32, GlweCiphertext32> for CoreEngine {
+impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey32, GlweCiphertext32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -27,7 +27,7 @@ impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey32, GlweCiphertext32> for C
     /// let polynomial_size = PolynomialSize(1024);
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: GlweSecretKey32 = engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     ///
     /// let ciphertext = engine.zero_encrypt_glwe_ciphertext(&key, noise)?;
@@ -66,9 +66,9 @@ impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey32, GlweCiphertext32> for C
 }
 
 /// # Description:
-/// Implementation of [`GlweCiphertextZeroEncryptionEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`GlweCiphertextZeroEncryptionEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
-impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey64, GlweCiphertext64> for CoreEngine {
+impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey64, GlweCiphertext64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -82,7 +82,7 @@ impl GlweCiphertextZeroEncryptionEngine<GlweSecretKey64, GlweCiphertext64> for C
     /// let polynomial_size = PolynomialSize(1024);
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: GlweSecretKey64 = engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     ///
     /// let ciphertext = engine.zero_encrypt_glwe_ciphertext(&key, noise)?;

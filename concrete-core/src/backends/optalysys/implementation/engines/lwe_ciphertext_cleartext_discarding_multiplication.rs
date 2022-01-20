@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     Cleartext32, Cleartext64, LweCiphertext32, LweCiphertext64,
 };
@@ -9,14 +9,14 @@ use crate::specification::engines::{
 use crate::specification::entities::LweCiphertextEntity;
 
 /// # Description:
-/// Implementation of [`LweCiphertextCleartextDiscardingMultiplicationEngine`] for [`CoreEngine`]
+/// Implementation of [`LweCiphertextCleartextDiscardingMultiplicationEngine`] for [`OptalysysEngine`]
 /// that operates on 32 bits integers.
 impl
     LweCiphertextCleartextDiscardingMultiplicationEngine<
         LweCiphertext32,
         Cleartext32,
         LweCiphertext32,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -33,7 +33,7 @@ impl
     /// let cleartext_input = 12_u32;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext32 = engine.create_cleartext(&cleartext_input)?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext = engine.create_plaintext(&input)?;
@@ -77,14 +77,14 @@ impl
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextCleartextDiscardingMultiplicationEngine`] for [`CoreEngine`]
+/// Implementation of [`LweCiphertextCleartextDiscardingMultiplicationEngine`] for [`OptalysysEngine`]
 /// that operates on 64 bits integers.
 impl
     LweCiphertextCleartextDiscardingMultiplicationEngine<
         LweCiphertext64,
         Cleartext64,
         LweCiphertext64,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -101,7 +101,7 @@ impl
     /// let cleartext_input = 12_u64;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext64 = engine.create_cleartext(&cleartext_input)?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext = engine.create_plaintext(&input)?;

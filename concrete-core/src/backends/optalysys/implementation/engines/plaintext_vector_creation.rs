@@ -1,12 +1,12 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{PlaintextVector32, PlaintextVector64};
 use crate::backends::optalysys::private::crypto::encoding::PlaintextList as ImplPlaintextList;
 use crate::specification::engines::{PlaintextVectorCreationEngine, PlaintextVectorCreationError};
 
 /// # Description:
-/// Implementation of [`PlaintextVectorCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`PlaintextVectorCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
-impl PlaintextVectorCreationEngine<u32, PlaintextVector32> for CoreEngine {
+impl PlaintextVectorCreationEngine<u32, PlaintextVector32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::PlaintextCount;
@@ -17,7 +17,7 @@ impl PlaintextVectorCreationEngine<u32, PlaintextVector32> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = vec![3_u32 << 20; 3];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext_vector: PlaintextVector32 = engine.create_plaintext_vector(&input)?;
     /// #
     /// assert_eq!(plaintext_vector.plaintext_count(), PlaintextCount(3));
@@ -42,9 +42,9 @@ impl PlaintextVectorCreationEngine<u32, PlaintextVector32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`PlaintextVectorCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`PlaintextVectorCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
-impl PlaintextVectorCreationEngine<u64, PlaintextVector64> for CoreEngine {
+impl PlaintextVectorCreationEngine<u64, PlaintextVector64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::PlaintextCount;
@@ -55,7 +55,7 @@ impl PlaintextVectorCreationEngine<u64, PlaintextVector64> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 50 bits)
     /// let input = vec![3_u64 << 50; 3];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext_vector: PlaintextVector64 = engine.create_plaintext_vector(&input)?;
     /// #
     /// assert_eq!(plaintext_vector.plaintext_count(), PlaintextCount(3));

@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     Cleartext32, Cleartext64, CleartextVector32, CleartextVector64, FourierLweBootstrapKey32,
     FourierLweBootstrapKey64, GlweCiphertext32, GlweCiphertext64, GlweCiphertextVector32,
@@ -10,7 +10,7 @@ use crate::backends::optalysys::implementation::entities::{
 use crate::backends::optalysys::private::math::tensor::AsMutTensor;
 use crate::specification::engines::{DestructionEngine, DestructionError};
 
-impl DestructionEngine<Cleartext32> for CoreEngine {
+impl DestructionEngine<Cleartext32> for OptalysysEngine {
     fn destroy(&mut self, entity: Cleartext32) -> Result<(), DestructionError<Self::EngineError>> {
         unsafe { self.destroy_unchecked(entity) };
         Ok(())
@@ -19,7 +19,7 @@ impl DestructionEngine<Cleartext32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: Cleartext32) {}
 }
 
-impl DestructionEngine<Cleartext64> for CoreEngine {
+impl DestructionEngine<Cleartext64> for OptalysysEngine {
     fn destroy(&mut self, entity: Cleartext64) -> Result<(), DestructionError<Self::EngineError>> {
         unsafe { self.destroy_unchecked(entity) };
         Ok(())
@@ -28,7 +28,7 @@ impl DestructionEngine<Cleartext64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: Cleartext64) {}
 }
 
-impl DestructionEngine<CleartextVector32> for CoreEngine {
+impl DestructionEngine<CleartextVector32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: CleartextVector32,
@@ -40,7 +40,7 @@ impl DestructionEngine<CleartextVector32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: CleartextVector32) {}
 }
 
-impl DestructionEngine<CleartextVector64> for CoreEngine {
+impl DestructionEngine<CleartextVector64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: CleartextVector64,
@@ -52,7 +52,7 @@ impl DestructionEngine<CleartextVector64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: CleartextVector64) {}
 }
 
-impl DestructionEngine<Plaintext32> for CoreEngine {
+impl DestructionEngine<Plaintext32> for OptalysysEngine {
     fn destroy(&mut self, entity: Plaintext32) -> Result<(), DestructionError<Self::EngineError>> {
         unsafe { self.destroy_unchecked(entity) };
         Ok(())
@@ -61,7 +61,7 @@ impl DestructionEngine<Plaintext32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: Plaintext32) {}
 }
 
-impl DestructionEngine<Plaintext64> for CoreEngine {
+impl DestructionEngine<Plaintext64> for OptalysysEngine {
     fn destroy(&mut self, entity: Plaintext64) -> Result<(), DestructionError<Self::EngineError>> {
         unsafe { self.destroy_unchecked(entity) };
         Ok(())
@@ -70,7 +70,7 @@ impl DestructionEngine<Plaintext64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: Plaintext64) {}
 }
 
-impl DestructionEngine<PlaintextVector32> for CoreEngine {
+impl DestructionEngine<PlaintextVector32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: PlaintextVector32,
@@ -82,7 +82,7 @@ impl DestructionEngine<PlaintextVector32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: PlaintextVector32) {}
 }
 
-impl DestructionEngine<PlaintextVector64> for CoreEngine {
+impl DestructionEngine<PlaintextVector64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: PlaintextVector64,
@@ -94,7 +94,7 @@ impl DestructionEngine<PlaintextVector64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: PlaintextVector64) {}
 }
 
-impl DestructionEngine<LweCiphertext32> for CoreEngine {
+impl DestructionEngine<LweCiphertext32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweCiphertext32,
@@ -106,7 +106,7 @@ impl DestructionEngine<LweCiphertext32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweCiphertext32) {}
 }
 
-impl DestructionEngine<LweCiphertext64> for CoreEngine {
+impl DestructionEngine<LweCiphertext64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweCiphertext64,
@@ -118,7 +118,7 @@ impl DestructionEngine<LweCiphertext64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweCiphertext64) {}
 }
 
-impl DestructionEngine<LweCiphertextVector32> for CoreEngine {
+impl DestructionEngine<LweCiphertextVector32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweCiphertextVector32,
@@ -130,7 +130,7 @@ impl DestructionEngine<LweCiphertextVector32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweCiphertextVector32) {}
 }
 
-impl DestructionEngine<LweCiphertextVector64> for CoreEngine {
+impl DestructionEngine<LweCiphertextVector64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweCiphertextVector64,
@@ -142,7 +142,7 @@ impl DestructionEngine<LweCiphertextVector64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweCiphertextVector64) {}
 }
 
-impl DestructionEngine<GlweCiphertext32> for CoreEngine {
+impl DestructionEngine<GlweCiphertext32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: GlweCiphertext32,
@@ -154,7 +154,7 @@ impl DestructionEngine<GlweCiphertext32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: GlweCiphertext32) {}
 }
 
-impl DestructionEngine<GlweCiphertext64> for CoreEngine {
+impl DestructionEngine<GlweCiphertext64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: GlweCiphertext64,
@@ -166,7 +166,7 @@ impl DestructionEngine<GlweCiphertext64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: GlweCiphertext64) {}
 }
 
-impl DestructionEngine<GlweCiphertextVector32> for CoreEngine {
+impl DestructionEngine<GlweCiphertextVector32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: GlweCiphertextVector32,
@@ -178,7 +178,7 @@ impl DestructionEngine<GlweCiphertextVector32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: GlweCiphertextVector32) {}
 }
 
-impl DestructionEngine<GlweCiphertextVector64> for CoreEngine {
+impl DestructionEngine<GlweCiphertextVector64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: GlweCiphertextVector64,
@@ -190,7 +190,7 @@ impl DestructionEngine<GlweCiphertextVector64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: GlweCiphertextVector64) {}
 }
 
-impl DestructionEngine<LweBootstrapKey32> for CoreEngine {
+impl DestructionEngine<LweBootstrapKey32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweBootstrapKey32,
@@ -202,7 +202,7 @@ impl DestructionEngine<LweBootstrapKey32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweBootstrapKey32) {}
 }
 
-impl DestructionEngine<LweBootstrapKey64> for CoreEngine {
+impl DestructionEngine<LweBootstrapKey64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweBootstrapKey64,
@@ -214,7 +214,7 @@ impl DestructionEngine<LweBootstrapKey64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweBootstrapKey64) {}
 }
 
-impl DestructionEngine<FourierLweBootstrapKey32> for CoreEngine {
+impl DestructionEngine<FourierLweBootstrapKey32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: FourierLweBootstrapKey32,
@@ -226,7 +226,7 @@ impl DestructionEngine<FourierLweBootstrapKey32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: FourierLweBootstrapKey32) {}
 }
 
-impl DestructionEngine<FourierLweBootstrapKey64> for CoreEngine {
+impl DestructionEngine<FourierLweBootstrapKey64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: FourierLweBootstrapKey64,
@@ -238,7 +238,7 @@ impl DestructionEngine<FourierLweBootstrapKey64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: FourierLweBootstrapKey64) {}
 }
 
-impl DestructionEngine<LweKeyswitchKey32> for CoreEngine {
+impl DestructionEngine<LweKeyswitchKey32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweKeyswitchKey32,
@@ -250,7 +250,7 @@ impl DestructionEngine<LweKeyswitchKey32> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweKeyswitchKey32) {}
 }
 
-impl DestructionEngine<LweKeyswitchKey64> for CoreEngine {
+impl DestructionEngine<LweKeyswitchKey64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweKeyswitchKey64,
@@ -262,7 +262,7 @@ impl DestructionEngine<LweKeyswitchKey64> for CoreEngine {
     unsafe fn destroy_unchecked(&mut self, _entity: LweKeyswitchKey64) {}
 }
 
-impl DestructionEngine<LweSecretKey32> for CoreEngine {
+impl DestructionEngine<LweSecretKey32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweSecretKey32,
@@ -277,7 +277,7 @@ impl DestructionEngine<LweSecretKey32> for CoreEngine {
     }
 }
 
-impl DestructionEngine<LweSecretKey64> for CoreEngine {
+impl DestructionEngine<LweSecretKey64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: LweSecretKey64,
@@ -292,7 +292,7 @@ impl DestructionEngine<LweSecretKey64> for CoreEngine {
     }
 }
 
-impl DestructionEngine<GlweSecretKey32> for CoreEngine {
+impl DestructionEngine<GlweSecretKey32> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: GlweSecretKey32,
@@ -307,7 +307,7 @@ impl DestructionEngine<GlweSecretKey32> for CoreEngine {
     }
 }
 
-impl DestructionEngine<GlweSecretKey64> for CoreEngine {
+impl DestructionEngine<GlweSecretKey64> for OptalysysEngine {
     fn destroy(
         &mut self,
         entity: GlweSecretKey64,

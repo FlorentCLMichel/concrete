@@ -1,12 +1,12 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{Cleartext32, Cleartext64};
 use crate::backends::optalysys::private::crypto::encoding::Cleartext as ImplCleartext;
 use crate::specification::engines::{CleartextCreationEngine, CleartextCreationError};
 
 /// # Description:
-/// Implementation of [`CleartextCreationEngine`] for [`CoreEngine`] that operates on 32 bits
+/// Implementation of [`CleartextCreationEngine`] for [`OptalysysEngine`] that operates on 32 bits
 /// integers.
-impl CleartextCreationEngine<u32, Cleartext32> for CoreEngine {
+impl CleartextCreationEngine<u32, Cleartext32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -15,7 +15,7 @@ impl CleartextCreationEngine<u32, Cleartext32> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input: u32 = 3;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext32 = engine.create_cleartext(&input)?;
     /// engine.destroy(cleartext)?;
     /// #
@@ -35,9 +35,9 @@ impl CleartextCreationEngine<u32, Cleartext32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`CleartextCreationEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`CleartextCreationEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl CleartextCreationEngine<u64, Cleartext64> for CoreEngine {
+impl CleartextCreationEngine<u64, Cleartext64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -46,7 +46,7 @@ impl CleartextCreationEngine<u64, Cleartext64> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input: u64 = 3;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext64 = engine.create_cleartext(&input)?;
     /// engine.destroy(cleartext)?;
     /// #

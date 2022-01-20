@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{PlaintextVector32, PlaintextVector64};
 use crate::backends::optalysys::private::math::tensor::AsRefTensor;
 use crate::specification::engines::{
@@ -6,9 +6,9 @@ use crate::specification::engines::{
 };
 
 /// # Description:
-/// Implementation of [`PlaintextVectorRetrievalEngine`] for [`CoreEngine`] that operates on 32 bits
+/// Implementation of [`PlaintextVectorRetrievalEngine`] for [`OptalysysEngine`] that operates on 32 bits
 /// integers.
-impl PlaintextVectorRetrievalEngine<PlaintextVector32, u32> for CoreEngine {
+impl PlaintextVectorRetrievalEngine<PlaintextVector32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::PlaintextCount;
@@ -19,7 +19,7 @@ impl PlaintextVectorRetrievalEngine<PlaintextVector32, u32> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = vec![3_u32 << 20; 3];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext_vector: PlaintextVector32 = engine.create_plaintext_vector(&input)?;
     /// let output: Vec<u32> = engine.retrieve_plaintext_vector(&plaintext_vector)?;
     /// #
@@ -45,9 +45,9 @@ impl PlaintextVectorRetrievalEngine<PlaintextVector32, u32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`PlaintextVectorRetrievalEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`PlaintextVectorRetrievalEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl PlaintextVectorRetrievalEngine<PlaintextVector64, u64> for CoreEngine {
+impl PlaintextVectorRetrievalEngine<PlaintextVector64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::PlaintextCount;
@@ -58,7 +58,7 @@ impl PlaintextVectorRetrievalEngine<PlaintextVector64, u64> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = vec![3_u64 << 20; 3];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext_vector: PlaintextVector64 = engine.create_plaintext_vector(&input)?;
     /// let output: Vec<u64> = engine.retrieve_plaintext_vector(&plaintext_vector)?;
     /// #

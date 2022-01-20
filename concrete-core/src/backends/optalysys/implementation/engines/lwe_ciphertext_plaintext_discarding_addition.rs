@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     LweCiphertext32, LweCiphertext64, Plaintext32, Plaintext64,
 };
@@ -8,10 +8,10 @@ use crate::specification::engines::{
 use crate::specification::entities::LweCiphertextEntity;
 
 /// # Description:
-/// Implementation of [`LweCiphertextPlaintextDiscardingAdditionEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextPlaintextDiscardingAdditionEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
 impl LweCiphertextPlaintextDiscardingAdditionEngine<LweCiphertext32, Plaintext32, LweCiphertext32>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -27,7 +27,7 @@ impl LweCiphertextPlaintextDiscardingAdditionEngine<LweCiphertext32, Plaintext32
     /// let input = 3_u32 << 20;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext = engine.create_plaintext(&input)?;
     /// let ciphertext_1 = engine.encrypt_lwe_ciphertext(&key, &plaintext, noise)?;
@@ -69,10 +69,10 @@ impl LweCiphertextPlaintextDiscardingAdditionEngine<LweCiphertext32, Plaintext32
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextPlaintextDiscardingAdditionEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextPlaintextDiscardingAdditionEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
 impl LweCiphertextPlaintextDiscardingAdditionEngine<LweCiphertext64, Plaintext64, LweCiphertext64>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -88,7 +88,7 @@ impl LweCiphertextPlaintextDiscardingAdditionEngine<LweCiphertext64, Plaintext64
     /// let input = 3_u64 << 50;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext = engine.create_plaintext(&input)?;
     /// let ciphertext_1 = engine.encrypt_lwe_ciphertext(&key, &plaintext, noise)?;

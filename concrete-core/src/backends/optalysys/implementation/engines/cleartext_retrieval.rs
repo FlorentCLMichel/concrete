@@ -1,11 +1,11 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{Cleartext32, Cleartext64};
 use crate::specification::engines::{CleartextRetrievalEngine, CleartextRetrievalError};
 
 /// # Description:
-/// Implementation of [`CleartextRetrievalEngine`] for [`CoreEngine`] that operates on 32 bits
+/// Implementation of [`CleartextRetrievalEngine`] for [`OptalysysEngine`] that operates on 32 bits
 /// integers.
-impl CleartextRetrievalEngine<Cleartext32, u32> for CoreEngine {
+impl CleartextRetrievalEngine<Cleartext32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -14,7 +14,7 @@ impl CleartextRetrievalEngine<Cleartext32, u32> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input: u32 = 3;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext32 = engine.create_cleartext(&input)?;
     /// let output: u32 = engine.retrieve_cleartext(&cleartext)?;
     ///
@@ -37,9 +37,9 @@ impl CleartextRetrievalEngine<Cleartext32, u32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`CleartextRetrievalEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`CleartextRetrievalEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl CleartextRetrievalEngine<Cleartext64, u64> for CoreEngine {
+impl CleartextRetrievalEngine<Cleartext64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -48,7 +48,7 @@ impl CleartextRetrievalEngine<Cleartext64, u64> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input: u64 = 3;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext: Cleartext64 = engine.create_cleartext(&input)?;
     /// let output: u64 = engine.retrieve_cleartext(&cleartext)?;
     ///

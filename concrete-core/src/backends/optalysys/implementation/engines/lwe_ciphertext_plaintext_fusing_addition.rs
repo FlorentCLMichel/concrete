@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     LweCiphertext32, LweCiphertext64, Plaintext32, Plaintext64,
 };
@@ -7,9 +7,9 @@ use crate::specification::engines::{
 };
 
 /// # Description:
-/// Implementation of [`LweCiphertextPlaintextFusingAdditionEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextPlaintextFusingAdditionEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
-impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext32, Plaintext32> for CoreEngine {
+impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext32, Plaintext32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -25,7 +25,7 @@ impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext32, Plaintext32> fo
     /// let input_2 = 5_u32 << 20;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext_1 = engine.create_plaintext(&input_1)?;
     /// let plaintext_2 = engine.create_plaintext(&input_2)?;
@@ -62,9 +62,9 @@ impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext32, Plaintext32> fo
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextPlaintextFusingAdditionEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextPlaintextFusingAdditionEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
-impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext64, Plaintext64> for CoreEngine {
+impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext64, Plaintext64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -80,7 +80,7 @@ impl LweCiphertextPlaintextFusingAdditionEngine<LweCiphertext64, Plaintext64> fo
     /// let input_2 = 5_u64 << 40;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext_1 = engine.create_plaintext(&input_1)?;
     /// let plaintext_2 = engine.create_plaintext(&input_2)?;

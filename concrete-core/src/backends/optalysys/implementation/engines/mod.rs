@@ -40,15 +40,15 @@ use std::collections::BTreeMap;
 #[derive(Ord, PartialOrd, Eq, PartialEq)]
 pub(crate) struct FourierBufferKey(pub PolynomialSize, pub GlweSize);
 
-/// The main engine exposed by the core backend.
-pub struct CoreEngine {
+/// The main engine exposed by the Optalysys backend.
+pub struct OptalysysEngine {
     secret_generator: ImplSecretRandomGenerator,
     encryption_generator: ImplEncryptionRandomGenerator,
     fourier_bsk_buffers_u32: BTreeMap<FourierBufferKey, FourierBskBuffers<u32>>,
     fourier_bsk_buffers_u64: BTreeMap<FourierBufferKey, FourierBskBuffers<u64>>,
 }
 
-impl CoreEngine {
+impl OptalysysEngine {
     pub(crate) fn get_fourier_bootstrap_u32_buffer(
         &mut self,
         fourier_bsk: &FourierLweBootstrapKey32,
@@ -74,13 +74,13 @@ impl CoreEngine {
     }
 }
 
-impl AbstractEngineSeal for CoreEngine {}
+impl AbstractEngineSeal for OptalysysEngine {}
 
-impl AbstractEngine for CoreEngine {
+impl AbstractEngine for OptalysysEngine {
     type EngineError = CoreError;
 
     fn new() -> Result<Self, Self::EngineError> {
-        Ok(CoreEngine {
+        Ok(OptalysysEngine {
             secret_generator: ImplSecretRandomGenerator::new(None),
             encryption_generator: ImplEncryptionRandomGenerator::new(None),
             fourier_bsk_buffers_u32: Default::default(),

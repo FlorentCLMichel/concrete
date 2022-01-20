@@ -1,12 +1,12 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{Plaintext32, Plaintext64};
 use crate::backends::optalysys::private::crypto::encoding::Plaintext as ImplPlaintext;
 use crate::specification::engines::{PlaintextCreationEngine, PlaintextCreationError};
 
 /// # Description:
-/// Implementation of [`PlaintextCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`PlaintextCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
-impl PlaintextCreationEngine<u32, Plaintext32> for CoreEngine {
+impl PlaintextCreationEngine<u32, Plaintext32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -16,7 +16,7 @@ impl PlaintextCreationEngine<u32, Plaintext32> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = 3_u32 << 20;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext: Plaintext32 = engine.create_plaintext(&input)?;
     /// engine.destroy(plaintext)?;
     /// #
@@ -36,9 +36,9 @@ impl PlaintextCreationEngine<u32, Plaintext32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`PlaintextCreationEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`PlaintextCreationEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
-impl PlaintextCreationEngine<u64, Plaintext64> for CoreEngine {
+impl PlaintextCreationEngine<u64, Plaintext64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -48,7 +48,7 @@ impl PlaintextCreationEngine<u64, Plaintext64> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 50 bits)
     /// let input = 3_u64 << 50;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext: Plaintext64 = engine.create_plaintext(&input)?;
     /// engine.destroy(plaintext)?;
     /// #

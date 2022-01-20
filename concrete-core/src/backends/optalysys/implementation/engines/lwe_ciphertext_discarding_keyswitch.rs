@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     LweCiphertext32, LweCiphertext64, LweKeyswitchKey32, LweKeyswitchKey64,
 };
@@ -8,10 +8,10 @@ use crate::specification::engines::{
 use crate::specification::entities::{LweCiphertextEntity, LweKeyswitchKeyEntity};
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingKeyswitchEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweCiphertextDiscardingKeyswitchEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
 impl LweCiphertextDiscardingKeyswitchEngine<LweKeyswitchKey32, LweCiphertext32, LweCiphertext32>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -32,7 +32,7 @@ impl LweCiphertextDiscardingKeyswitchEngine<LweKeyswitchKey32, LweCiphertext32, 
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = 3_u32 << 20;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let input_key: LweSecretKey32 = engine.create_lwe_secret_key(input_lwe_dimension)?;
     /// let output_key: LweSecretKey32 = engine.create_lwe_secret_key(output_lwe_dimension)?;
     /// let keyswitch_key = engine.create_lwe_keyswitch_key(
@@ -87,10 +87,10 @@ impl LweCiphertextDiscardingKeyswitchEngine<LweKeyswitchKey32, LweCiphertext32, 
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingKeyswitchEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweCiphertextDiscardingKeyswitchEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
 impl LweCiphertextDiscardingKeyswitchEngine<LweKeyswitchKey64, LweCiphertext64, LweCiphertext64>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -111,7 +111,7 @@ impl LweCiphertextDiscardingKeyswitchEngine<LweKeyswitchKey64, LweCiphertext64, 
     /// // Here a hard-set encoding is applied (shift by 50 bits)
     /// let input = 3_u64 << 50;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let input_key: LweSecretKey64 = engine.create_lwe_secret_key(input_lwe_dimension)?;
     /// let output_key: LweSecretKey64 = engine.create_lwe_secret_key(output_lwe_dimension)?;
     /// let keyswitch_key = engine.create_lwe_keyswitch_key(

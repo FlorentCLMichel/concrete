@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     CleartextVector32, CleartextVector64, LweCiphertext32, LweCiphertext64, LweCiphertextVector32,
     LweCiphertextVector64, Plaintext32, Plaintext64,
@@ -12,7 +12,7 @@ use crate::specification::entities::{
 };
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingAffineTransformationEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextDiscardingAffineTransformationEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
 impl
     LweCiphertextVectorDiscardingAffineTransformationEngine<
@@ -20,7 +20,7 @@ impl
         CleartextVector32,
         Plaintext32,
         LweCiphertext32,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -38,7 +38,7 @@ impl
     /// let bias_input = 8_u32 << 20;
     /// let noise = Variance::from_variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let weights: CleartextVector32 = engine.create_cleartext_vector(&input_vector)?;
     /// let bias: Plaintext32 = engine.create_plaintext(&bias_input)?;
@@ -104,7 +104,7 @@ impl
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingAffineTransformationEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextDiscardingAffineTransformationEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
 impl
     LweCiphertextVectorDiscardingAffineTransformationEngine<
@@ -112,7 +112,7 @@ impl
         CleartextVector64,
         Plaintext64,
         LweCiphertext64,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -130,7 +130,7 @@ impl
     /// let bias_input = 8_u64 << 50;
     /// let noise = Variance::from_variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let weights: CleartextVector64 = engine.create_cleartext_vector(&input_vector)?;
     /// let bias: Plaintext64 = engine.create_plaintext(&bias_input)?;

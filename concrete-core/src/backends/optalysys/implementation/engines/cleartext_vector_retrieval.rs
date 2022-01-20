@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{CleartextVector32, CleartextVector64};
 use crate::backends::optalysys::private::math::tensor::AsRefTensor;
 use crate::specification::engines::{
@@ -6,9 +6,9 @@ use crate::specification::engines::{
 };
 
 /// # Description:
-/// Implementation of [`CleartextVectorRetrievalEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`CleartextVectorRetrievalEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl CleartextVectorRetrievalEngine<CleartextVector32, u32> for CoreEngine {
+impl CleartextVectorRetrievalEngine<CleartextVector32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::CleartextCount;
@@ -18,7 +18,7 @@ impl CleartextVectorRetrievalEngine<CleartextVector32, u32> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input = vec![3_u32; 100];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext_vector: CleartextVector32 = engine.create_cleartext_vector(&input)?;
     /// let retrieved: Vec<u32> = engine.retrieve_cleartext_vector(&cleartext_vector)?;
     ///
@@ -44,9 +44,9 @@ impl CleartextVectorRetrievalEngine<CleartextVector32, u32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`CleartextVectorRetrievalEngine`] for [`CoreEngine`] that operates on 32 bits
+/// Implementation of [`CleartextVectorRetrievalEngine`] for [`OptalysysEngine`] that operates on 32 bits
 /// integers.
-impl CleartextVectorRetrievalEngine<CleartextVector64, u64> for CoreEngine {
+impl CleartextVectorRetrievalEngine<CleartextVector64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::CleartextCount;
@@ -56,7 +56,7 @@ impl CleartextVectorRetrievalEngine<CleartextVector64, u64> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input = vec![3_u64; 100];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext_vector: CleartextVector64 = engine.create_cleartext_vector(&input)?;
     /// let retrieved: Vec<u64> = engine.retrieve_cleartext_vector(&cleartext_vector)?;
     ///

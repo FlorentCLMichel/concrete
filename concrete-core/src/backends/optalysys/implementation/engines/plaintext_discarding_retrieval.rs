@@ -1,13 +1,13 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{Plaintext32, Plaintext64};
 use crate::specification::engines::{
     PlaintextDiscardingRetrievalEngine, PlaintextDiscardingRetrievalError,
 };
 
 /// # Description:
-/// Implementation of [`PlaintextDiscardingRetrievalEngine`] for [`CoreEngine`] that operates on 32
+/// Implementation of [`PlaintextDiscardingRetrievalEngine`] for [`OptalysysEngine`] that operates on 32
 /// bits integers.
-impl PlaintextDiscardingRetrievalEngine<Plaintext32, u32> for CoreEngine {
+impl PlaintextDiscardingRetrievalEngine<Plaintext32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -18,7 +18,7 @@ impl PlaintextDiscardingRetrievalEngine<Plaintext32, u32> for CoreEngine {
     /// let input = 3_u32 << 20;
     /// let mut output = 0_u32;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext: Plaintext32 = engine.create_plaintext(&input)?;
     /// engine.discard_retrieve_plaintext(&mut output, &plaintext)?;
     ///
@@ -46,7 +46,7 @@ impl PlaintextDiscardingRetrievalEngine<Plaintext32, u32> for CoreEngine {
     }
 }
 
-impl PlaintextDiscardingRetrievalEngine<Plaintext64, u64> for CoreEngine {
+impl PlaintextDiscardingRetrievalEngine<Plaintext64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -57,7 +57,7 @@ impl PlaintextDiscardingRetrievalEngine<Plaintext64, u64> for CoreEngine {
     /// let input = 3_u64 << 20;
     /// let mut output = 0_u64;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext: Plaintext64 = engine.create_plaintext(&input)?;
     /// engine.discard_retrieve_plaintext(&mut output, &plaintext)?;
     ///

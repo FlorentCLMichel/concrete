@@ -1,6 +1,6 @@
 use concrete_commons::dispersion::Variance;
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     LweCiphertextVector32, LweCiphertextVector64, LweSecretKey32, LweSecretKey64,
     PlaintextVector32, PlaintextVector64,
@@ -13,14 +13,14 @@ use crate::specification::entities::{
 };
 
 /// # Description:
-/// Implementation of [`LweCiphertextVectorDiscardingEncryptionEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextVectorDiscardingEncryptionEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
 impl
     LweCiphertextVectorDiscardingEncryptionEngine<
         LweSecretKey32,
         PlaintextVector32,
         LweCiphertextVector32,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -36,7 +36,7 @@ impl
     /// let input = vec![3_u32 << 20; 3];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext_vector: PlaintextVector32 = engine.create_plaintext_vector(&input)?;
     /// let mut ciphertext_vector: LweCiphertextVector32 =
@@ -96,14 +96,14 @@ impl
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextVectorDiscardingEncryptionEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweCiphertextVectorDiscardingEncryptionEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
 impl
     LweCiphertextVectorDiscardingEncryptionEngine<
         LweSecretKey64,
         PlaintextVector64,
         LweCiphertextVector64,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -119,7 +119,7 @@ impl
     /// let input = vec![3_u64 << 50; 3];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext_vector: PlaintextVector64 = engine.create_plaintext_vector(&input)?;
     /// let mut ciphertext_vector: LweCiphertextVector64 =

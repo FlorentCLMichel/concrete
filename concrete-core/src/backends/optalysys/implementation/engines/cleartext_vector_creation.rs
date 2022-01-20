@@ -1,12 +1,12 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{CleartextVector32, CleartextVector64};
 use crate::backends::optalysys::private::crypto::encoding::CleartextList as ImplCleartextList;
 use crate::specification::engines::{CleartextVectorCreationEngine, CleartextVectorCreationError};
 
 /// # Description:
-/// Implementation of [`CleartextVectorCreationEngine`] for [`CoreEngine`] that operates on 32 bits
+/// Implementation of [`CleartextVectorCreationEngine`] for [`OptalysysEngine`] that operates on 32 bits
 /// integers.
-impl CleartextVectorCreationEngine<u32, CleartextVector32> for CoreEngine {
+impl CleartextVectorCreationEngine<u32, CleartextVector32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::CleartextCount;
@@ -16,7 +16,7 @@ impl CleartextVectorCreationEngine<u32, CleartextVector32> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input = vec![3_u32; 100];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext_vector: CleartextVector32 = engine.create_cleartext_vector(&input)?;
     /// #
     /// assert_eq!(cleartext_vector.cleartext_count(), CleartextCount(100));
@@ -41,9 +41,9 @@ impl CleartextVectorCreationEngine<u32, CleartextVector32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`CleartextVectorCreationEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`CleartextVectorCreationEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl CleartextVectorCreationEngine<u64, CleartextVector64> for CoreEngine {
+impl CleartextVectorCreationEngine<u64, CleartextVector64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::parameters::CleartextCount;
@@ -53,7 +53,7 @@ impl CleartextVectorCreationEngine<u64, CleartextVector64> for CoreEngine {
     /// # fn main() -> Result<(), Box<dyn Error>> {
     /// let input = vec![3_u64; 100];
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let cleartext_vector: CleartextVector64 = engine.create_cleartext_vector(&input)?;
     /// #
     /// assert_eq!(cleartext_vector.cleartext_count(), CleartextCount(100));

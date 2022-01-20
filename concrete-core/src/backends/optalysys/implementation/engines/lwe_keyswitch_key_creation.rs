@@ -1,7 +1,7 @@
 use concrete_commons::dispersion::Variance;
 use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount};
 
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     LweKeyswitchKey32, LweKeyswitchKey64, LweSecretKey32, LweSecretKey64,
 };
@@ -10,10 +10,10 @@ use crate::specification::engines::{LweKeyswitchKeyCreationEngine, LweKeyswitchK
 use crate::specification::entities::LweSecretKeyEntity;
 
 /// # Description:
-/// Implementation of [`LweKeyswitchKeyCreationEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweKeyswitchKeyCreationEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
 impl LweKeyswitchKeyCreationEngine<LweSecretKey32, LweSecretKey32, LweKeyswitchKey32>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -32,7 +32,7 @@ impl LweKeyswitchKeyCreationEngine<LweSecretKey32, LweSecretKey32, LweKeyswitchK
     /// let decomposition_base_log = DecompositionBaseLog(8);
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let input_key: LweSecretKey32 = engine.create_lwe_secret_key(input_lwe_dimension)?;
     /// let output_key: LweSecretKey32 = engine.create_lwe_secret_key(output_lwe_dimension)?;
     ///
@@ -107,10 +107,10 @@ impl LweKeyswitchKeyCreationEngine<LweSecretKey32, LweSecretKey32, LweKeyswitchK
 }
 
 /// # Description:
-/// Implementation of [`LweKeyswitchKeyCreationEngine`] for [`CoreEngine`] that
+/// Implementation of [`LweKeyswitchKeyCreationEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
 impl LweKeyswitchKeyCreationEngine<LweSecretKey64, LweSecretKey64, LweKeyswitchKey64>
-    for CoreEngine
+    for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -129,7 +129,7 @@ impl LweKeyswitchKeyCreationEngine<LweSecretKey64, LweSecretKey64, LweKeyswitchK
     /// let decomposition_base_log = DecompositionBaseLog(8);
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let input_key: LweSecretKey64 = engine.create_lwe_secret_key(input_lwe_dimension)?;
     /// let output_key: LweSecretKey64 = engine.create_lwe_secret_key(output_lwe_dimension)?;
     ///

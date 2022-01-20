@@ -1,11 +1,11 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{Plaintext32, Plaintext64};
 use crate::specification::engines::{PlaintextRetrievalEngine, PlaintextRetrievalError};
 
 /// # Description:
-/// Implementation of [`PlaintextRetrievalEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`PlaintextRetrievalEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl PlaintextRetrievalEngine<Plaintext32, u32> for CoreEngine {
+impl PlaintextRetrievalEngine<Plaintext32, u32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -15,7 +15,7 @@ impl PlaintextRetrievalEngine<Plaintext32, u32> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = 3_u32 << 20;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext: Plaintext32 = engine.create_plaintext(&input)?;
     /// let output: u32 = engine.retrieve_plaintext(&plaintext)?;
     ///
@@ -38,9 +38,9 @@ impl PlaintextRetrievalEngine<Plaintext32, u32> for CoreEngine {
 }
 
 /// # Description:
-/// Implementation of [`PlaintextRetrievalEngine`] for [`CoreEngine`] that operates on 64 bits
+/// Implementation of [`PlaintextRetrievalEngine`] for [`OptalysysEngine`] that operates on 64 bits
 /// integers.
-impl PlaintextRetrievalEngine<Plaintext64, u64> for CoreEngine {
+impl PlaintextRetrievalEngine<Plaintext64, u64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_core::prelude::*;
@@ -50,7 +50,7 @@ impl PlaintextRetrievalEngine<Plaintext64, u64> for CoreEngine {
     /// // Here a hard-set encoding is applied (shift by 20 bits)
     /// let input = 3_u64 << 20;
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let plaintext: Plaintext64 = engine.create_plaintext(&input)?;
     /// let output: u64 = engine.retrieve_plaintext(&plaintext)?;
     ///

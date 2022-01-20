@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{LweCiphertext32, LweCiphertext64};
 use crate::backends::optalysys::private::math::tensor::AsMutTensor;
 use crate::specification::engines::{
@@ -7,9 +7,9 @@ use crate::specification::engines::{
 use crate::specification::entities::LweCiphertextEntity;
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingAdditionEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweCiphertextDiscardingAdditionEngine`] for [`OptalysysEngine`] that operates on
 /// 32 bits integers.
-impl LweCiphertextDiscardingAdditionEngine<LweCiphertext32, LweCiphertext32> for CoreEngine {
+impl LweCiphertextDiscardingAdditionEngine<LweCiphertext32, LweCiphertext32> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -25,7 +25,7 @@ impl LweCiphertextDiscardingAdditionEngine<LweCiphertext32, LweCiphertext32> for
     /// let input_2 = 7_u32 << 20;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey32 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext_1 = engine.create_plaintext(&input_1)?;
     /// let plaintext_2 = engine.create_plaintext(&input_2)?;
@@ -75,9 +75,9 @@ impl LweCiphertextDiscardingAdditionEngine<LweCiphertext32, LweCiphertext32> for
 }
 
 /// # Description:
-/// Implementation of [`LweCiphertextDiscardingAdditionEngine`] for [`CoreEngine`] that operates on
+/// Implementation of [`LweCiphertextDiscardingAdditionEngine`] for [`OptalysysEngine`] that operates on
 /// 64 bits integers.
-impl LweCiphertextDiscardingAdditionEngine<LweCiphertext64, LweCiphertext64> for CoreEngine {
+impl LweCiphertextDiscardingAdditionEngine<LweCiphertext64, LweCiphertext64> for OptalysysEngine {
     /// # Example:
     /// ```
     /// use concrete_commons::dispersion::Variance;
@@ -93,7 +93,7 @@ impl LweCiphertextDiscardingAdditionEngine<LweCiphertext64, LweCiphertext64> for
     /// let input_2 = 7_u64 << 50;
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: LweSecretKey64 = engine.create_lwe_secret_key(lwe_dimension)?;
     /// let plaintext_1 = engine.create_plaintext(&input_1)?;
     /// let plaintext_2 = engine.create_plaintext(&input_2)?;

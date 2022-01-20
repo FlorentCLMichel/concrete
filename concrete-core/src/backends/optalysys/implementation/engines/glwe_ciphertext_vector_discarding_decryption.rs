@@ -1,4 +1,4 @@
-use crate::backends::optalysys::implementation::engines::CoreEngine;
+use crate::backends::optalysys::implementation::engines::OptalysysEngine;
 use crate::backends::optalysys::implementation::entities::{
     GlweCiphertextVector32, GlweCiphertextVector64, GlweSecretKey32, GlweSecretKey64,
     PlaintextVector32, PlaintextVector64,
@@ -11,14 +11,14 @@ use crate::specification::entities::{
 };
 
 /// # Description:
-/// Implementation of [`GlweCiphertextVectorDiscardingDecryptionEngine`] for [`CoreEngine`] that
+/// Implementation of [`GlweCiphertextVectorDiscardingDecryptionEngine`] for [`OptalysysEngine`] that
 /// operates on 32 bits integers.
 impl
     GlweCiphertextVectorDiscardingDecryptionEngine<
         GlweSecretKey32,
         GlweCiphertextVector32,
         PlaintextVector32,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -35,7 +35,7 @@ impl
     /// let input = vec![3_u32 << 20; 8];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: GlweSecretKey32 = engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     /// let mut plaintext_vector = engine.create_plaintext_vector(&input)?;
     /// let ciphertext_vector =
@@ -88,14 +88,14 @@ impl
 }
 
 /// # Description:
-/// Implementation of [`GlweCiphertextVectorDiscardingDecryptionEngine`] for [`CoreEngine`] that
+/// Implementation of [`GlweCiphertextVectorDiscardingDecryptionEngine`] for [`OptalysysEngine`] that
 /// operates on 64 bits integers.
 impl
     GlweCiphertextVectorDiscardingDecryptionEngine<
         GlweSecretKey64,
         GlweCiphertextVector64,
         PlaintextVector64,
-    > for CoreEngine
+    > for OptalysysEngine
 {
     /// # Example:
     /// ```
@@ -112,7 +112,7 @@ impl
     /// let input = vec![3_u64 << 50; 8];
     /// let noise = Variance(2_f64.powf(-25.));
     ///
-    /// let mut engine = CoreEngine::new()?;
+    /// let mut engine = OptalysysEngine::new()?;
     /// let key: GlweSecretKey64 = engine.create_glwe_secret_key(glwe_dimension, polynomial_size)?;
     /// let mut plaintext_vector = engine.create_plaintext_vector(&input)?;
     /// let ciphertext_vector =
