@@ -46,3 +46,7 @@ multithread = ["rayon", "concrete-csprng/multithread"]
 [package.metadata.docs.rs]
 features = ["doc"]
 rustdoc-args = ["--html-in-header", "katex-header.html"]
+
+[[bench]]
+name = "bench"
+harness = false
