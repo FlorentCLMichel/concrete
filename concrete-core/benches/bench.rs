@@ -117,9 +117,10 @@ where
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
-    let mut group = c.benchmark_group("bootstrap");
+    let mut group = c.benchmark_group("core");
     group.significance_level(0.1).sample_size(10);
     group.bench_function("test_bootstrap_drift_u32", |b| b.iter(|| test_bootstrap_drift::<u32>()));
+    group.bench_function("test_bootstrap_drift_u64", |b| b.iter(|| test_bootstrap_drift::<u64>()));
     group.finish()
 }
 
