@@ -6,14 +6,13 @@ use crate::{
     random_boolean, random_integer, PLAINTEXT_FALSE, PLAINTEXT_LOG_SCALING_FACTOR, PLAINTEXT_TRUE,
 };
 use concrete_commons::parameters::{DecompositionBaseLog, DecompositionLevelCount, LweSize};
-use concrete_core::crypto::bootstrap::Bootstrap;
-use concrete_core::crypto::encoding::Plaintext;
-use concrete_core::crypto::glwe::GlweCiphertext;
-use concrete_core::crypto::lwe::LweCiphertext;
-use concrete_core::crypto::secret::generators::EncryptionRandomGenerator;
-use concrete_core::crypto::secret::LweSecretKey;
-use concrete_core::math::decomposition::SignedDecomposer;
-use concrete_core::math::tensor::{AsMutTensor, AsRefTensor};
+use concrete_core::backends::core::private::crypto::encoding::Plaintext;
+use concrete_core::backends::core::private::crypto::glwe::GlweCiphertext;
+use concrete_core::backends::core::private::crypto::lwe::LweCiphertext;
+use concrete_core::backends::core::private::crypto::secret::LweSecretKey;
+use concrete_core::backends::core::private::math::decomposition::SignedDecomposer;
+use concrete_core::backends::core::private::math::tensor::{AsMutTensor, AsRefTensor};
+use crate::server_key::FourierBuffers;
 
 /// Number of assert in randomized tests
 const NB_TEST: usize = 128;
@@ -98,10 +97,13 @@ fn test_encrypt_pbs_decrypt() {
         );
 
         // Compute the two PBS
+        let mut buffers = FourierBuffers::new(
+            sks.bootstrapping_key.polynomial_size(),
+            sks.bootstrapping_key.glwe_size());
         sks.bootstrapping_key
-            .bootstrap(&mut ct_pbs_true, &ct_true.0, &accumulator);
+            .bootstrap(&mut ct_pbs_true, &ct_true.0, &accumulator, &mut buffers);
         sks.bootstrapping_key
-            .bootstrap(&mut ct_pbs_false, &ct_false.0, &accumulator);
+            .bootstrap(&mut ct_pbs_false, &ct_false.0, &accumulator, &mut buffers);
 
         // allocation of the plaintexts
         let mut decrypted_true = Plaintext(0_u32);

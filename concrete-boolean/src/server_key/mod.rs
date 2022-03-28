@@ -12,13 +12,13 @@ use crate::ciphertext::Ciphertext;
 use crate::client_key::ClientKey;
 use crate::{PLAINTEXT_LOG_SCALING_FACTOR, PLAINTEXT_TRUE};
 use concrete_commons::parameters::LweDimension;
-use concrete_core::crypto::bootstrap::{Bootstrap, FourierBootstrapKey, StandardBootstrapKey};
-use concrete_core::crypto::encoding::Cleartext;
-use concrete_core::crypto::glwe::GlweCiphertext;
-use concrete_core::crypto::lwe::{LweCiphertext, LweKeyswitchKey};
-use concrete_core::crypto::secret::generators::EncryptionRandomGenerator;
-use concrete_core::math::fft::{AlignedVec, Complex64};
-use concrete_core::math::tensor::AsMutTensor;
+use concrete_core::backends::core::private::crypto::bootstrap::{FourierBootstrapKey, FourierBuffers, StandardBootstrapKey};
+use concrete_core::backends::core::private::crypto::encoding::Cleartext;
+use concrete_core::backends::core::private::crypto::glwe::GlweCiphertext;
+use concrete_core::backends::core::private::crypto::lwe::{LweCiphertext, LweKeyswitchKey};
+use concrete_core::backends::core::private::crypto::secret::generators::EncryptionRandomGenerator;
+use concrete_core::backends::core::private::math::fft::{AlignedVec, Complex64};
+use concrete_core::backends::core::private::math::tensor::AsMutTensor;
 use serde::{Deserialize, Serialize};
 
 /// A structure containing the server public key.
@@ -78,7 +78,8 @@ impl ServerKey {
             cks.parameters.pbs_base_log,
             cks.parameters.lwe_dimension,
         );
-        fourier_bsk.fill_with_forward_fourier(&coef_bsk);
+        let mut buffers = FourierBuffers::new(fourier_bsk.polynomial_size(), fourier_bsk.glwe_size());
+        fourier_bsk.fill_with_forward_fourier(&coef_bsk, &mut buffers);
 
         // Allocate the key switching key:
         let mut ksk = LweKeyswitchKey::allocate(
@@ -159,8 +160,11 @@ impl ServerKey {
         );
 
         // Compute the programmable bootstrapping with fixed test polynomial
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator);
+            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator, &mut buffers);
 
         // Compute a key switch to get back to input key
         let mut ct_ks = LweCiphertext::allocate(0_u32, ct_left.0.lwe_size());
@@ -245,12 +249,15 @@ impl ServerKey {
         );
 
         // Compute the first programmable bootstrapping with fixed test polynomial:
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs_1, &ct_temp_1, &accumulator);
+            .bootstrap(&mut ct_pbs_1, &ct_temp_1, &accumulator, &mut buffers);
 
         // Compute the second programmable bootstrapping with fixed test polynomial:
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs_2, &ct_temp_2, &accumulator);
+            .bootstrap(&mut ct_pbs_2, &ct_temp_2, &accumulator, &mut buffers);
 
         // Compute the linear combination to add the two results : ct_pbs_1 + ct_pbs_2 + (0,...,0,
         // +1/8)
@@ -322,8 +329,11 @@ impl ServerKey {
         );
 
         // Compute the programmable bootstrapping with fixed test polynomial:
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator);
+            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator, &mut buffers);
 
         // Compute the key switch to get back to input key:
         let mut ct_ks = LweCiphertext::allocate(0_u32, ct_left.0.lwe_size());
@@ -386,8 +396,11 @@ impl ServerKey {
         );
 
         // Compute the Programmable bootstrapping with fixed test polynomial:
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator);
+            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator, &mut buffers);
 
         // Compute the key switch to get back to input key:
         let mut ct_ks = LweCiphertext::allocate(0_u32, ct_left.0.lwe_size());
@@ -479,8 +492,11 @@ impl ServerKey {
         );
 
         // Compute the programmable bootstrapping with fixed test polynomial:
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator);
+            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator, &mut buffers);
 
         // Compute a key switch to get back to input key:
         let mut ct_ks = LweCiphertext::allocate(0_u32, ct_left.0.lwe_size());
@@ -545,8 +561,11 @@ impl ServerKey {
         );
 
         // Compute a programmable bootstrapping with fixed test polynomial:
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator);
+            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator, &mut buffers);
 
         // Compute a key switching to get back to input key:
         let mut ct_ks = LweCiphertext::allocate(0_u32, ct_left.0.lwe_size());
@@ -609,8 +628,11 @@ impl ServerKey {
         );
 
         // Compute the programmable bootstrapping with fixed test polynomial:
+        let mut buffers = FourierBuffers::new(
+            self.bootstrapping_key.polynomial_size(),
+            self.bootstrapping_key.glwe_size());
         self.bootstrapping_key
-            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator);
+            .bootstrap(&mut ct_pbs, &ct_temp, &accumulator, &mut buffers);
 
         // Compute the key switching to get back to input key:
         let mut ct_ks = LweCiphertext::allocate(0_u32, ct_left.0.lwe_size());

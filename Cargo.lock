@@ -216,8 +216,8 @@ dependencies = [
 name = "concrete-boolean"
 version = "0.1.1"
 dependencies = [
- "concrete-commons 0.1.1",
- "concrete-core 0.1.10",
+ "concrete-commons 0.2.0",
+ "concrete-core 1.0.0-alpha",
  "criterion",
  "serde",
 ]
@@ -249,7 +249,6 @@ dependencies = [
  "concrete-csprng 0.1.7",
  "concrete-fftw",
  "lazy_static",
- "rayon",
  "serde",
 ]
 

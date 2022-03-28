@@ -7,10 +7,10 @@ use crate::ciphertext::Ciphertext;
 use crate::parameters::BooleanParameters;
 use crate::{PLAINTEXT_FALSE, PLAINTEXT_TRUE};
 use concrete_commons::key_kinds::BinaryKeyKind;
-use concrete_core::crypto::encoding::Plaintext;
-use concrete_core::crypto::lwe::LweCiphertext;
-use concrete_core::crypto::secret::generators::{EncryptionRandomGenerator, SecretRandomGenerator};
-use concrete_core::crypto::secret::{GlweSecretKey, LweSecretKey};
+use concrete_core::backends::core::private::crypto::encoding::Plaintext;
+use concrete_core::backends::core::private::crypto::lwe::LweCiphertext;
+use concrete_core::backends::core::private::crypto::secret::generators::{EncryptionRandomGenerator, SecretRandomGenerator};
+use concrete_core::backends::core::private::crypto::secret::{GlweSecretKey, LweSecretKey};
 use serde::{Deserialize, Serialize};
 
 /// A structure containing the client key, which must be kept secret.

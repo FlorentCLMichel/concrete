@@ -2,7 +2,7 @@
 //!
 //! This module implements the ciphertext structure containing an encryption of a Boolean message.
 
-use concrete_core::crypto::lwe::LweCiphertext;
+use concrete_core::backends::core::private::crypto::lwe::LweCiphertext;
 use serde::{Deserialize, Serialize};
 
 /// A structure containing a ciphertext, meant to encrypt a Boolean message.
