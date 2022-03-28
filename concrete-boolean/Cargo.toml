@@ -27,3 +27,6 @@ harness = false
 
 [package.metadata.docs.rs]
 rustdoc-args = ["--html-in-header", "katex-header.html"]
+
+[features]
+backend_optalysys = ["concrete-core/backend_optalysys"]

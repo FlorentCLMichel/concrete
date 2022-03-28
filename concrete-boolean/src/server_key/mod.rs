@@ -12,7 +12,12 @@ use crate::ciphertext::Ciphertext;
 use crate::client_key::ClientKey;
 use crate::{PLAINTEXT_LOG_SCALING_FACTOR, PLAINTEXT_TRUE};
 use concrete_commons::parameters::LweDimension;
-use concrete_core::backends::core::private::crypto::bootstrap::{FourierBootstrapKey, FourierBuffers, StandardBootstrapKey};
+#[cfg(feature="backend_optalysys")]
+use concrete_core::backends::optalysys::private::crypto::bootstrap::{FourierBootstrapKey, 
+                                             fourier::buffers::FourierBskBuffers as FourierBuffers};
+#[cfg(not(feature="backend_optalysys"))]
+use concrete_core::backends::core::private::crypto::bootstrap::{FourierBootstrapKey, FourierBuffers};
+use concrete_core::backends::core::private::crypto::bootstrap::StandardBootstrapKey;
 use concrete_core::backends::core::private::crypto::encoding::Cleartext;
 use concrete_core::backends::core::private::crypto::glwe::GlweCiphertext;
 use concrete_core::backends::core::private::crypto::lwe::{LweCiphertext, LweKeyswitchKey};

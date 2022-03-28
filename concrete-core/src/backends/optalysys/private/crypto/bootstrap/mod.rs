@@ -5,7 +5,7 @@
 
 pub use fourier::FourierBootstrapKey;
 
-pub(crate) mod fourier;
+pub mod fourier;
 
 #[cfg(all(test, feature = "multithread"))]
 mod test {
