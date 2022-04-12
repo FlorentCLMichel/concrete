@@ -14,12 +14,13 @@ keywords = ["fully", "homomorphic", "encryption", "fhe", "cryptography"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-concrete-core = {path="../concrete-core", features=["multithread", "serde_serialize"]}
-concrete-commons = {path="../concrete-commons"}
+concrete-core = { version = "1.0.0-beta", features = ["multithread", "serde_serialize",
+    "backend_optalysys"] }
 serde = { version = "1.0", features = ["derive"] }
 
 [dev-dependencies]
 criterion = "0.3.4"
+rand = "0.8.4"
 
 [[bench]]
 name = "bench"
@@ -27,6 +28,3 @@ harness = false
 
 [package.metadata.docs.rs]
 rustdoc-args = ["--html-in-header", "katex-header.html"]
-
-[features]
-backend_optalysys = ["concrete-core/backend_optalysys"]

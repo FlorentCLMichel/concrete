@@ -49,6 +49,15 @@ impl Error for CoreError {}
 pub(crate) struct FourierBufferKey(pub PolynomialSize, pub GlweSize);
 
 /// The main engine exposed by the core backend.
+// We attach Fourier buffers to the Core Engine:
+// each time a bootstrap key is created, a check
+// is made to see whether those buffers exist for
+// the required polynomial and GLWE sizes.
+// If the buffers already exist, they are simply
+// used when it comes to computing FFTs.
+// If they don't exist already, they are allocated.
+// In this way we avoid re-allocating those buffers
+// every time an FFT or iFFT is performed.
 pub struct CoreEngine {
     secret_generator: ImplSecretRandomGenerator,
     encryption_generator: ImplEncryptionRandomGenerator,
@@ -137,11 +146,11 @@ mod lwe_ciphertext_discarding_decryption;
 mod lwe_ciphertext_discarding_encryption;
 mod lwe_ciphertext_discarding_extraction;
 mod lwe_ciphertext_discarding_keyswitch;
-mod lwe_ciphertext_discarding_negation;
+mod lwe_ciphertext_discarding_opposite;
 mod lwe_ciphertext_discarding_subtraction;
 mod lwe_ciphertext_encryption;
 mod lwe_ciphertext_fusing_addition;
-mod lwe_ciphertext_fusing_negation;
+mod lwe_ciphertext_fusing_opposite;
 mod lwe_ciphertext_fusing_subtraction;
 mod lwe_ciphertext_plaintext_discarding_addition;
 mod lwe_ciphertext_plaintext_discarding_subtraction;
@@ -158,12 +167,14 @@ mod lwe_ciphertext_vector_discarding_subtraction;
 mod lwe_ciphertext_vector_encryption;
 mod lwe_ciphertext_vector_fusing_addition;
 mod lwe_ciphertext_vector_fusing_subtraction;
+mod lwe_ciphertext_vector_glwe_ciphertext_discarding_packing_keyswitch;
 mod lwe_ciphertext_vector_trivial_decryption;
 mod lwe_ciphertext_vector_trivial_encryption;
 mod lwe_ciphertext_vector_zero_encryption;
 mod lwe_ciphertext_zero_encryption;
 mod lwe_keyswitch_key_creation;
 mod lwe_secret_key_creation;
+mod packing_keyswitch_key_creation;
 mod plaintext_creation;
 mod plaintext_discarding_retrieval;
 mod plaintext_retrieval;

@@ -305,14 +305,14 @@ pub use lwe_ciphertext_discarding_keyswitch::*;
 mod lwe_ciphertext_discarding_addition;
 pub use lwe_ciphertext_discarding_addition::*;
 
-mod lwe_ciphertext_discarding_negation;
-pub use lwe_ciphertext_discarding_negation::*;
+mod lwe_ciphertext_discarding_opposite;
+pub use lwe_ciphertext_discarding_opposite::*;
 
 mod lwe_ciphertext_fusing_addition;
 pub use lwe_ciphertext_fusing_addition::*;
 
-mod lwe_ciphertext_fusing_negation;
-pub use lwe_ciphertext_fusing_negation::*;
+mod lwe_ciphertext_fusing_opposite;
+pub use lwe_ciphertext_fusing_opposite::*;
 
 mod lwe_ciphertext_discarding_subtraction;
 pub use lwe_ciphertext_discarding_subtraction::*;
@@ -412,3 +412,6 @@ pub use lwe_bootstrap_key_conversion::*;
 
 mod lwe_bootstrap_key_discarding_conversion;
 pub use lwe_bootstrap_key_discarding_conversion::*;
+
+mod lwe_ciphertext_vector_glwe_ciphertext_discarding_packing_keyswitch;
+pub use lwe_ciphertext_vector_glwe_ciphertext_discarding_packing_keyswitch::*;

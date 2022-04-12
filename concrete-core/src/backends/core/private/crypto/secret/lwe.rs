@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 
 use concrete_commons::dispersion::DispersionParameter;
 use concrete_commons::key_kinds::{
-    KeyKind, BinaryKeyKind, GaussianKeyKind, TernaryKeyKind, UniformKeyKind,
+    BinaryKeyKind, GaussianKeyKind, KeyKind, TernaryKeyKind, UniformKeyKind,
 };
 use concrete_commons::numeric::Numeric;
 use concrete_commons::parameters::LweDimension;
